@@ -1,0 +1,7 @@
+{
+  "name": "dig-ion",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
