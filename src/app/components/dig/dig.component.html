@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Dig | Digs</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <form #filterDigs="ngForm" (ngSubmit)="filterDigData(filterDigs.form)" class="ion-margin" >
+        <ion-list>
+      <ion-col>
+        <ion-item>
+          <ion-label>Attribute</ion-label>
+          <ion-select  ngModel #attributeField="ngModel" name="attribute" okText="Okay" cancelText="Dismiss">
+            <ion-select-option *ngFor="let col of columns" value="{{col.name}}">{{col.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Value</ion-label>
+          <ion-input name="value" ngModel #valueField="ngModel" required></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-button type="submit" expand="block" [disabled]="!filterDigs.valid" class="inputField">Filter</ion-button>
+        <ion-button (click)="reset()" type="submit" expand="block"  class="inputField">Reset</ion-button>
+
+      </ion-col>
+      </ion-list>
+      </form>
+    </ion-row>
+  </ion-grid>
+<!-- 
+        <form #filterDigs="ngForm" (ngSubmit)="filterDigData(filterDigs.form)" class="ion-padding ion-margin">
+          <ion-list>
+            <ion-item>
+              <ion-label>Attribute</ion-label>
+              <ion-select  ngModel #attributeField="ngModel" name="attribute" okText="Okay" cancelText="Dismiss">
+                <ion-select-option *ngFor="let col of columns" value="{{col.name}}">{{col.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">Value</ion-label>
+              <ion-input name="value" ngModel #valueField="ngModel" required></ion-input>
+            </ion-item>
+            <ion-button type="submit" expand="block" [disabled]="!filterDigs.valid" class="inputField">Filter</ion-button>
+          </ion-list>
+          
+          </form> -->
+<ion-grid>
+      <ion-row>
+        <ion-col>
+         <ngx-datatable 
+          class="material"
+          [limit]="15" 
+          [rows]="rows" 
+          [rowHeight]="40" 
+          [columns]="columns"
+          [columnMode]="'force'" 
+          [sortType]="'multi'" 
+          [headerHeight]="50" 
+          [footerHeight]="50"
+          [scrollbarH]="true">  
+      </ngx-datatable>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

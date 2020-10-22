@@ -1,3 +1,78 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="content1" side="start">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Dig</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <!-- <ion-item routerLink="" (click)="close()">
+          <ion-label>
+            Metadata 
+          </ion-label>
+        </ion-item> -->
+
+        <ion-item routerLink="home" (click)="close()" *ngIf="userIsLoggedIn">
+          <ion-label>
+            Home
+          </ion-label>
+        </ion-item>
+
+        <ion-item routerLink="client" (click)="close()" *ngIf="userIsLoggedIn">
+          <ion-label>
+            Client
+          </ion-label>
+        </ion-item>
+
+        <ion-item routerLink="facility" (click)="close()" *ngIf="userIsLoggedIn">
+          <ion-label>
+            Facility
+          </ion-label>
+        </ion-item>
+
+        <ion-item routerLink="pipeline" (click)="close()" *ngIf="userIsLoggedIn">
+          <ion-label>
+            Pipeline
+          </ion-label>
+        </ion-item>
+
+        <ion-item routerLink="dig" (click)="close()" *ngIf="userIsLoggedIn">
+          <ion-label>
+            Dig
+          </ion-label>
+        </ion-item>
+
+        <ion-item routerLink="workflow" (click)="close()" *ngIf="userIsLoggedIn">
+          <ion-label>
+            Workflow
+          </ion-label>
+        </ion-item>
+
+
+
+        <!-- <ion-item routerLink="project" (click)="close()" *ngIf="userIsLoggedIn">
+          <ion-label>
+            Project
+          </ion-label>
+        </ion-item>
+
+        <ion-item routerLink="notifications" (click)="close()" *ngIf="userIsLoggedIn" >
+          <ion-label>Notifications</ion-label>
+          <ion-badge slot="end">{{notificationCount}}</ion-badge>
+        </ion-item> -->
+
+        <ion-item routerLink="login"  (click)="logout()">
+          <ion-label *ngIf="userIsLoggedIn">
+            Logout
+          </ion-label>
+          <ion-label *ngIf="!userIsLoggedIn">
+            Login
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="content1" main></ion-router-outlet>
 </ion-app>
+

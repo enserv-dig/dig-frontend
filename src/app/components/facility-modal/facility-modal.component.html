@@ -1,0 +1,24 @@
+<form #createFacility="ngForm" (ngSubmit)="submitFacility(createFacility.form)" class="ion-padding ion-margin" style="margin-top: 10vh;" >
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input name="facilityName" ngModel #nameField="ngModel" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-select  ngModel #statusField="ngModel" name="facilityStatus" okText="Okay" cancelText="Dismiss">
+        <ion-select-option value="active">Active</ion-select-option>
+        <ion-select-option value="inactive">Inactive</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Client</ion-label>
+      <ion-select ngModel #clientField="ngModel" name="client" okText="Okay" cancelText="Dismiss">
+        <ion-select-option *ngFor="let client of clients" value={{client.clientName}}>{{client.clientName}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+    <ion-button type="submit" expand="block" [disabled]="!createFacility.valid" class="inputField">Create</ion-button>
+  </ion-list>
+  
+  </form>

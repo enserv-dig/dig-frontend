@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Dig</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3">
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>create digs from CSV</ion-card-subtitle>
+            <ion-card-title>upload CSV</ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <ion-input type="file" accept="file" class="upload" (change)="readCsv($event.target.files)"> </ion-input>
+          </ion-card-content>
+        </ion-card>
+        
+
+      </ion-col>
+      <ion-col size="3">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>adds client to database</ion-card-subtitle>
+            <ion-card-title>Create Client</ion-card-title>
+          </ion-card-header>
+        
+          <ion-button color="primary" (click)="openClientModal()">Add Client</ion-button>
+        </ion-card>
+      </ion-col>
+
+    
+    <ion-col size="3">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>adds facility to database</ion-card-subtitle>
+          <ion-card-title>Create Facility</ion-card-title>
+        </ion-card-header>
+      
+        <ion-button color="primary" (click)="openFacilityModal()">Add Facility</ion-button>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="3">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>adds pipeline to database</ion-card-subtitle>
+          <ion-card-title>Create Pipeline</ion-card-title>
+        </ion-card-header>
+      
+        <ion-button color="primary" (click)="openPipelineModal()">Add Pipeline</ion-button>
+      </ion-card>
+    </ion-col>
+
+
+
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

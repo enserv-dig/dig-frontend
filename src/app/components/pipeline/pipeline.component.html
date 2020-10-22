@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Dig | Pipeline</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" offset-sm="3">
+          <ion-list>
+            <ion-item-sliding *ngFor="let pipeline of pipelines">
+              <ion-item>
+                <ion-label>{{pipeline.pipelineName}}
+                  <ion-icon name="ellipse" [color]="pipeline.activePipeline ? 'success' : 'danger' "></ion-icon>
+                </ion-label>
+              </ion-item>
+              <ion-item-options side="end">
+                <ion-item-option>
+                  <ion-toggle color="light"></ion-toggle>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  
