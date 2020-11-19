@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { DigService } from 'src/app/services/dig.service';
 import { DigSelectComponent } from '../dig-select/dig-select.component';
 
 @Component({
@@ -9,9 +10,15 @@ import { DigSelectComponent } from '../dig-select/dig-select.component';
 })
 export class WorkflowComponent implements OnInit {
 
-  constructor(private modalController: ModalController) { }
+  workflows: any;
 
-  ngOnInit() {}
+  constructor(private modalController: ModalController, private digService: DigService) { }
+
+  ngOnInit() {
+    this.digService.getAllWorkflows().subscribe(data => {
+      this.workflows = data;
+    })
+  }
 
 
   async openDigSelectModal() {

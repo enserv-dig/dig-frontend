@@ -1,0 +1,381 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Dig | Standard Excavation Checklist</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <!-- <ion-col size="3">
+        <pre>{{ filterForm.value | json }}</pre>
+
+      </ion-col> -->
+      <ion-col size="10" offset="1">
+
+        <div [formGroup]="filterForm" (ngSubmit)="submit()">
+
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Excavation Safety Worksheet</ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+              Start Date 
+              <input type="text" 
+                     #dateFromDp="dpDayPicker"
+                     [dpDayPicker]="dayPickerConfig"
+                     [theme]="'dp-material'"
+                     formControlName="dateFrom"
+                     [mode]="'day'"
+                     (onChange)="date = $event" />
+          
+              End Date
+              <input type="text" 
+                     #dateToDp="dpDayPicker"
+                     [dpDayPicker]="dayPickerConfig"
+                     [displayDate]="displayDate"
+                     [theme]="'dp-material'"
+                     formControlName="dateTo"
+                     [mode]="'day'"
+                     (onChange)="date = $event" />
+  
+              <ion-item>
+                <ion-label position="floating">Job Description and Location</ion-label>
+                <ion-textarea formControlName="description"></ion-textarea>
+              </ion-item>
+
+              <ion-item>
+                <ion-list>
+                  <ion-item>
+                    <ion-label>
+                      Company Competent Person
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input formControlName="competentPerson"></ion-input>
+                  </ion-item>
+                </ion-list>
+
+                <ion-list>
+                  <ion-item>
+                    <ion-label>
+                      Company Job Site Supervisor                    
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input formControlName="siteSupervisor"></ion-input>
+                  </ion-item>
+                </ion-list>
+
+                <ion-list>
+                  <ion-item>
+                    <ion-label>
+                      Contractor Job Site Foreman                    
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input formControlName="siteForeman"></ion-input>
+                  </ion-item>
+                </ion-list>
+
+                <ion-list>
+                  <ion-item>
+                    <ion-label>
+                      Contractor Competent Person (if Applicable)
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input formControlName="contractorCompetentPerson"></ion-input>
+                  </ion-item>
+                </ion-list>
+
+              </ion-item>
+  
+            </ion-card-content>
+          </ion-card>
+
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Before Excavation/Trenching</ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+              <ion-card-subtitle>
+                Assume “C” class (Unstable soil – Allowable slope is 1 ½ horizontal to 1 vertical (maximum of 34 degree slope measured from the horizontal)
+                Exceptions to the above sloping criteria must have prior approval by the Area Manager or their Designee.
+              </ion-card-subtitle>
+
+                <ion-item>
+                  <ion-label>
+                    Protective System
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="protectiveSystem">
+                    <ion-select-option value="sloping">Sloping 1½ to 1 (34º) and benching</ion-select-option>
+                    <ion-select-option value="trench">Trench box or trench shields</ion-select-option>
+                    <ion-select-option value ="Other">Other</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-card-subtitle>
+                Has proximity of excavation to utilities, buildings, footings, pilings, or sources of vibration been reviewed?
+                </ion-card-subtitle>
+
+                  <ion-item>
+                    <ion-label>
+                      Review Status
+                    </ion-label>
+                    <ion-select placeholder="Select One" formControlName="reviewStatus">
+                      <ion-select-option value="yes">Yes</ion-select-option>
+                      <ion-select-option value="na">NA</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label position="floating">
+                      Other known obstructions? If yes describe:
+                    </ion-label>
+                    <ion-textarea formControlName="obstructions"></ion-textarea>
+                  </ion-item>
+
+                  <ion-card-subtitle>
+                    Have the following companies or owners been contacted and asked to establish the location of the following installations prior to the start of the excavation?
+                 </ion-card-subtitle>
+
+                 <ion-item>
+                  <ion-label>
+                    Land Owners
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="landOwners">
+                    <ion-select-option value="yes">Yes</ion-select-option>
+                    <ion-select-option value="na">NA</ion-select-option>
+                  </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Utilities
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="utilites">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <!-- <ion-iten>
+                <ion-label>
+                  Electrical
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="electrical">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-iten> -->
+
+              <ion-item>
+                <ion-label>
+                  Water
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="water">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Sewer
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="sewer">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-card-subtitle>
+                Are the necessary personnel and equipment available prior to going to the job site?
+              </ion-card-subtitle>
+
+              <ion-item>
+                <ion-label>
+                  Tools
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="tools">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Personal Protective Equipment
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="protectiveEquipments">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-card-subtitle>
+                Protective System Materials
+              </ion-card-subtitle>
+
+              <ion-item>
+                <ion-label>
+                  Back Hoe
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="blackHoe">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Excavator
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="excavator">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Trench box
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="trenchBox">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Trench shields
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="trenchShields">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Signs
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="signs">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Barricades
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="barricades">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Water Removal Equipment
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="waterRemovalEquipment">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Equipment spotter/safety observer
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="safetyObserver">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label text-wrap>
+                  If excavation exceeds 4 feet has toxic/ 	hazardous atmosphere been monitored 	prior to entry and applicable permits 	completed?
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="excavation4">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+              
+              <ion-item>
+                <ion-label text-wrap>
+                  Where hazardous atmospheric conditions 	exist or can reasonably be expected to 	exist is emergency rescue equipment 	required (i.e. Breathing air, safety harness 	and lifeline)
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="hazardCondition">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label text-wrap>
+                  Is the excavation expected to equal or exceed a depth of 20 feet?  If so, then the sloping and benching shall be designed by a registered professional engineer. 
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="excavation20">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label text-wrap>
+                  Is the contractor(s) aware of OSHA and Company excavation, trenching and shoring safety requirements?
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="contractorAware">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label text-wrap>
+                  Has a copy of the Company’s excavation safety inspection checklist been given to the contractor(s) prior to the job beginning?
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="checklistPriorProvided">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item> 
+                <ion-label text-wrap>
+                  Has the contractor(s) been advised the Company expects/requires compliance with OSHA and Company excavation and trenching safety requirements?                </ion-label>
+                <ion-select placeholder="Select One" formControlName="contractorAdvised">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">
+                  Additional comments/observations:
+                </ion-label>
+                <ion-textarea formControlName="comments"></ion-textarea>
+              </ion-item>
+
+            </ion-card-content>
+          </ion-card>
+          <ion-button color="primary" (click)="submit(filterForm)">Submit</ion-button>
+          </div>    
+          
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

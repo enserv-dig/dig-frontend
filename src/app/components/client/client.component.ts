@@ -21,5 +21,13 @@ export class ClientComponent implements OnInit {
     })
   }
 
+  toggleClicked(event) {
+    if(!event.target.checked) {
+      console.log("change to active");
+    } else {
+      console.log("change to inactive");
+    }
+}
+
 
 }

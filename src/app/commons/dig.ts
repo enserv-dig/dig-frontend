@@ -1,6 +1,7 @@
 import { Time } from '@angular/common';
 
 export class Dig {
+    digId: Number;
     anamolyId: Number;
     inspectionYear: Number;
     feature: String;

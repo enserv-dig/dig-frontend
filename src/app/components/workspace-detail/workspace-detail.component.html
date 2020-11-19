@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Dig | Work Space</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card *ngFor="let paperwork of paperworks">
+    <ion-card-header>
+      <ion-card-subtitle>{{paperwork.paperworkType.paperworkTypeTitle}}</ion-card-subtitle>
+      <ion-card-title>{{paperwork.paperworkName}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content *ngIf="paperwork.action!='form'">
+
+      <h3 *ngIf="check(paperwork)">
+        <ion-icon size="large" name="cloud-done-sharp"></ion-icon>
+      </h3>
+
+      <label class="btn btn-default" *ngIf="!check(paperwork)">
+        <input type="file" (change)="selectFile($event)">
+      </label>
+      <button *ngIf="!check(paperwork)" class="btn btn-success" [disabled]="!selectedFiles" (click)="upload(paperwork.paperworkName)">Upload</button>
+      
+    </ion-card-content>
+
+    <ion-button (click)="openSec()" *ngIf="paperwork.paperworkId == 13 && !check(paperwork)">
+      Start
+    </ion-button>
+    <h3 *ngIf="check(paperwork)">
+      <ion-icon size="large" name="cloud-done-sharp"></ion-icon>
+    </h3>
+  </ion-card>
+
+</ion-content>

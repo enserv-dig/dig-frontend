@@ -3,11 +3,15 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ClientComponent } from './components/client/client.component';
 import { DigComponent } from './components/dig/dig.component';
 import { FacilityComponent } from './components/facility/facility.component';
+import { SecFormComponent } from './components/forms/sec-form/sec-form.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
 import { PipelineComponent } from './components/pipeline/pipeline.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { WorkflowDetailComponent } from './components/workflow-detail/workflow-detail.component';
 import { WorkflowComponent } from './components/workflow/workflow.component';
+import { WorkspaceDetailComponent } from './components/workspace-detail/workspace-detail.component';
+import { WorkspaceComponent } from './components/workspace/workspace.component';
 import { AuthGuard } from './services/auth/auth.guard';
 
 const routes: Routes = [
@@ -19,6 +23,11 @@ const routes: Routes = [
   { path: 'pipeline', component: PipelineComponent, pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'dig', component: DigComponent, pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'workflow', component: WorkflowComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'workspace', component: WorkspaceComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'workspace/:id', component: WorkspaceDetailComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'form/sec/:id', component: SecFormComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'workflow/:id', component: WorkflowDetailComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+
   { path: '', redirectTo: '/login', pathMatch: 'full'},
 
 ];

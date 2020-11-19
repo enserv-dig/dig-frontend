@@ -49,6 +49,12 @@
           </ion-label>
         </ion-item>
 
+        <ion-item routerLink="workspace" (click)="close()" *ngIf="userIsLoggedIn">
+          <ion-label>
+            Work Space
+          </ion-label>
+        </ion-item>
+
 
 
         <!-- <ion-item routerLink="project" (click)="close()" *ngIf="userIsLoggedIn">

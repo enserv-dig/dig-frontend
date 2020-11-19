@@ -4,13 +4,15 @@
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
+    <ion-button slot="end" color="light" (click)="createWorkflow(form)" type="submit" expand="block"  class="inputField">Create Workflow</ion-button>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
     <ion-row>
-      <form #filterDigs="ngForm" (ngSubmit)="filterDigData(filterDigs.form)" class="ion-margin" >
+      <!-- <form #filterDigs="ngForm" (ngSubmit)="filterDigData(filterDigs.form)" class="ion-margin" >
         <ion-list>
       <ion-col>
         <ion-item>
@@ -32,7 +34,7 @@
 
       </ion-col>
       </ion-list>
-      </form>
+      </form> -->
     </ion-row>
   </ion-grid>
 <!-- 
@@ -53,10 +55,11 @@
           </ion-list>
           
           </form> -->
-<ion-grid>
+<ion-grid class="tab">
       <ion-row>
         <ion-col>
-         <ngx-datatable 
+
+         <!-- <ngx-datatable 
           class="material"
           [limit]="15" 
           [rows]="rows" 
@@ -67,7 +70,20 @@
           [headerHeight]="50" 
           [footerHeight]="50"
           [scrollbarH]="true">  
-      </ngx-datatable>
+      </ngx-datatable> -->
+
+      <table class="rwd-table">
+        <tr>
+          <th *ngFor="let col of columns; let headIndex=index">{{col.name}}</th>
+        </tr>
+        <tr *ngFor="let row of rows" >
+          <td>
+            <ion-checkbox color="primary" (ionChange) = "checked(row, $event)"></ion-checkbox>
+          </td>
+          <td *ngFor="let col of columns.slice(1); let bodyIndex=index">{{row[col.name]}}</td>
+        </tr>
+      </table> 
+
       </ion-col>
     </ion-row>
   </ion-grid>

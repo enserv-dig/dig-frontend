@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Form } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Client } from 'src/app/commons/client';
 import { DigService } from 'src/app/services/dig.service';
 
@@ -12,7 +12,7 @@ import { DigService } from 'src/app/services/dig.service';
 export class ClientModalComponent implements OnInit {
   status: any;
 
-  constructor(private modalController: ModalController, private digService: DigService) { }
+  constructor(private modalController: ModalController, private digService: DigService, private toastController: ToastController) { }
 
   ngOnInit() {
   }
@@ -20,11 +20,22 @@ export class ClientModalComponent implements OnInit {
   submitClient(clientForm) {
     var client: Client = new Client(clientForm.value.clientName, clientForm.value.clientStatus);
     this.digService.createClient(clientForm.value.clientName, status).subscribe(data => {
+      this.modalController.dismiss();
+      this.presentToast();
     });
   }
 
   selectOption(option) {
     status = option;
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Client created successfuly',
+      duration: 2000,
+      color: 'success'
+    });
+    toast.present();
   }
 
 }

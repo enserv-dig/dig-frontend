@@ -14,7 +14,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './services/auth/http-interceptor.service';
 import { AuthGuard } from './services/auth/auth.guard';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientModalComponent } from './components/homepage/client-modal/client-modal.component';
 import { ClientComponent } from './components/client/client.component';
 import { FacilityModalComponent } from './components/facility-modal/facility-modal.component';
@@ -24,18 +24,26 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { PipelineModalComponent } from './components/pipeline-modal/pipeline-modal.component';
 import { PipelineComponent } from './components/pipeline/pipeline.component';
 import { DigSelectComponent } from './components/dig-select/dig-select.component';
+import { WorkflowComponent } from './components/workflow/workflow.component';
+import { WorkflowDetailComponent } from './components/workflow-detail/workflow-detail.component';
+import { SecFormComponent } from './components/forms/sec-form/sec-form.component';
+import {DpDatePickerModule} from 'ng2-date-picker';
+import { WorkspaceComponent } from './components/workspace/workspace.component';
+import { WorkspaceDetailComponent } from './components/workspace-detail/workspace-detail.component';
+import { AwsService } from './services/aws.service';
 
 @NgModule({
-  declarations: [AppComponent, HomepageComponent, LoginComponent, SignupComponent, ClientModalComponent, FacilityModalComponent, PipelineModalComponent, ClientComponent, FacilityComponent, DigComponent, PipelineComponent, DigSelectComponent],
+  declarations: [AppComponent, HomepageComponent, LoginComponent, SignupComponent, ClientModalComponent, FacilityModalComponent, PipelineModalComponent, ClientComponent, FacilityComponent, DigComponent, PipelineComponent, DigSelectComponent, WorkflowComponent, WorkflowDetailComponent, SecFormComponent, WorkspaceComponent, WorkspaceDetailComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, NgxDatatableModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, NgxDatatableModule, ReactiveFormsModule, DpDatePickerModule],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
     StatusBar,
     SplashScreen,
     AuthGuard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    NgxDatatableModule
+    NgxDatatableModule,
+    DpDatePickerModule,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { DigService } from 'src/app/services/dig.service';
 
@@ -9,18 +10,16 @@ import { DigService } from 'src/app/services/dig.service';
   encapsulation: ViewEncapsulation.None
 })
 export class DigComponent implements OnInit {
-  digs: any;
+  digs = [];
   rows: any;
   columns: any;
+  workflows: any;
 
-  constructor(private digService: DigService) {
-    // this.columns = [
-    //   { name: 'Name' },
-    //   { name: 'Company' },
-    //   { name: 'Genre' }
-    // ];
+  constructor(private digService: DigService, private toastController: ToastController) {
+
 
     this.columns = [
+       {name: "select"},
        { name: "anomalyId"},
        { name: "inspectionYear"},
        { name: "feature"},
@@ -52,7 +51,6 @@ export class DigComponent implements OnInit {
        { name:"pprimeB31g"},
        { name:"pprimeRstreng"},
     ]
-
    }
 
   ngOnInit() {}
@@ -76,6 +74,45 @@ export class DigComponent implements OnInit {
 
   reset() {
     this.ionViewWillEnter();
+    this.digs = [];
+  }
+
+  checked(dig, event) {
+    if(event.target.checked) {
+      this.digs.push(dig);
+    } else if(!event.target.checked) {
+      this.digs = this.digs.filter(item => {
+        return item.digId !== dig.digId;
+      })
+    }
+
+  }
+
+  createWorkflow() {
+    this.digService.getAllWorkflows().subscribe(data => {
+      this.workflows = data;
+      var num = this.workflows.length;
+      var name = "wf" + num;
+
+      var ids = [];
+      this.digs.forEach(dig => {
+        ids.push(dig.digId);
+      })
+      this.digService.createWorkflow(name, ids).subscribe(wfs => {
+        this.reset();
+        this.presentToast(`workflow ${name} created successfully`,'success');
+      })
+    })
+  }
+
+
+  async presentToast(text, col: string) {
+    const toast = await this.toastController.create({
+      message: text,
+      duration: 2000,
+      color: col
+    });
+    toast.present();
   }
 
 

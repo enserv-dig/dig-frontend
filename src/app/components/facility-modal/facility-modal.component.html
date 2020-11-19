@@ -1,3 +1,4 @@
+<ion-content fullscreen class="ion-padding">
 <form #createFacility="ngForm" (ngSubmit)="submitFacility(createFacility.form)" class="ion-padding ion-margin" style="margin-top: 10vh;" >
   <ion-list>
     <ion-item>
@@ -20,5 +21,6 @@
   
     <ion-button type="submit" expand="block" [disabled]="!createFacility.valid" class="inputField">Create</ion-button>
   </ion-list>
-  
+
   </form>
+  </ion-content>
