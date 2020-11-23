@@ -1,0 +1,505 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Dig | Work Permit</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <!-- <ion-col size="3">
+        <pre>{{ filterForm.value | json }}</pre>
+      </ion-col> -->
+      <ion-col size="10" offset="1">
+
+        <div [formGroup]="filterForm" (ngSubmit)="submit()">
+
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Work Permit</ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+              Permit Completed By
+              <input type="text" 
+                     #dateFromDp="dpDayPicker"
+                     [dpDayPicker]="dayPickerConfig"
+                     [theme]="'dp-material'"
+                     formControlName="dateFrom"
+                     [mode]="'day'"
+                     (onChange)="date = $event" />
+          
+              Permit Closed By
+              <input type="text" 
+                     #dateToDp="dpDayPicker"
+                     [dpDayPicker]="dayPickerConfig"
+                     [displayDate]="displayDate"
+                     [theme]="'dp-material'"
+                     formControlName="dateTo"
+                     [mode]="'day'"
+                     (onChange)="date = $event" />
+              </ion-card-content>
+
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Section I Confined Space Permit (Good for 12 Hours only)</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-item>
+                <ion-label position="floating">Confined Space to be entered</ion-label>
+                <ion-textarea formControlName="confinedSpace"></ion-textarea>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Purpose of Entry</ion-label>
+                <ion-textarea formControlName="entryPurpose"></ion-textarea>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Has the confined space been properly isolated? 
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="isolated">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Has atmosphere been tested and determined safe?	
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="atmosphereTested">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Does confined space involve other permits?                
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="otherPermits">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Is testing equipment required?              
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="testEquipmentRequired">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Are barricades/warning signs utilized?              
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="signsUsed">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Has pre-safety meeting been conducted and documented?             
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="meetingDone">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Ventilation method used            
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="ventilationMethod">
+                  <ion-select-option value="forced">Forced</ion-select-option>
+                  <ion-select-option value="naturalGraft">Natural graft</ion-select-option>
+                  <ion-select-option value="other">Other</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Communication Method            
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="communicationMethod">
+                  <ion-select-option value="voice">Voice</ion-select-option>
+                  <ion-select-option value="handSignal">Hand Signal</ion-select-option>
+                  <ion-select-option value="radio">Radio</ion-select-option>
+                  <ion-select-option value="airHorn">Air Horn</ion-select-option>
+                  <ion-select-option value="other">Other</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Retrieval Equipment Required             
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="retrievalEquipment">
+                  <ion-select-option value="retrieverLine">Retriever Line</ion-select-option>
+                  <ion-select-option value="accessLadder">Access Ladder</ion-select-option>
+                  <ion-select-option value="harness">Harness</ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Type of Air Monitoring             
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="airMonitoring">
+                  <ion-select-option value="continuous">Continuous</ion-select-option>
+                  <ion-select-option value="periodic">Periodic</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Type of Lighting Required            
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="lightingRequired">
+                  <ion-select-option value="lowVoltage">Low Voltage</ion-select-option>
+                  <ion-select-option value="120v">120V w/GFCI</ion-select-option>
+                  <ion-select-option value="explosionProof">Explosion Proof</ion-select-option>
+                  <ion-select-option value="natural">Natural </ion-select-option>
+                  <ion-select-option value="na">NA</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Physical Hazards           
+                </ion-label>
+                <ion-select multiple="true" placeholder="Select One" formControlName="physicalHazards">
+                  <ion-select-option value="asphyxiation">Asphyxiation</ion-select-option>
+                  <ion-select-option value="electrical">Electrical</ion-select-option>
+                  <ion-select-option value="temperature">Temperature</ion-select-option>
+                  <ion-select-option value="wetConditions">Wet Conditions</ion-select-option>
+                  <ion-select-option value="scaffolding">Scaffolding</ion-select-option>
+                  <ion-select-option value="engulfment">Engulfment</ion-select-option>
+                  <ion-select-option value="mechanical">Mechanical</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+                <ion-card-header>
+                  <ion-card-title>
+                    Confined Space Entry Rooster
+                  </ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-item>
+                    <ion-list>
+                      <ion-item>
+                        <ion-label>
+                          Entry Supervisor Name
+                        </ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-input formControlName="supervisorName"></ion-input>
+                      </ion-item>
+                    </ion-list>
+    
+                    <ion-list>
+                      <ion-item>
+                        <ion-label>
+                          Safety Attendant Name                  
+                        </ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-input formControlName="safetyAttendentName"></ion-input>
+                      </ion-item>
+                    </ion-list>
+
+                    <ion-list>
+                      <ion-item>
+                        <ion-label>
+                          Safety Attendant Name (Alternate):               
+                        </ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-input formControlName="safetyAttendentNameAlt"></ion-input>
+                      </ion-item>
+                    </ion-list>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-list>
+                      <ion-item>
+                        <ion-label>
+                          Entrant Name
+                        </ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-input formControlName="entrantName"></ion-input>
+                      </ion-item>
+                    </ion-list>
+
+                    <ion-list>
+                      <ion-item>
+                        <ion-label>
+                          Clock In Time
+                        </ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-input formControlName="clockIn"></ion-input>
+                      </ion-item>
+                    </ion-list>
+
+                    <ion-list>
+                      <ion-item>
+                        <ion-label>
+                          Clock Out Time
+                        </ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-input formControlName="clockOut"></ion-input>
+                      </ion-item>
+                    </ion-list>
+              </ion-item>
+
+                </ion-card-content>
+            </ion-card-content>
+          </ion-card>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              Section II Atmospheric Testing (Completed For All Hot Work and Confined Space Entry)
+            </ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-item>
+              <ion-list>
+                <ion-item>
+                  <ion-label>
+                    Oxygen ( 19.5-23.5% )
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-input formControlName="initialOxygen"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input formControlName="finalOxygen"></ion-input>
+                </ion-item>
+              </ion-list>
+
+              <ion-list>
+                <ion-item>
+                  <ion-label>
+                    Flammability ( 0 - 10% LEL )                 
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-input formControlName="initialFlammability"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input formControlName="finalFlammability"></ion-input>
+                </ion-item>
+              </ion-list>
+
+              <ion-list>
+                <ion-item>
+                  <ion-label>
+                    H2S ( less than 10 PPM )                   
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-input formControlName="initialH2S"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-input formControlName="finalH2S"></ion-input>
+                </ion-item>
+              </ion-list>
+
+              <ion-list>
+                <ion-item>
+                  <ion-label>
+                    CO ( 0-35 PPM )                 
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-input formControlName="initialCO"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input formControlName="finalCO"></ion-input>
+                </ion-item>
+              </ion-list>
+
+              <ion-list>
+                <ion-item>
+                  <ion-label>
+                    Benzene ( 1 PPM )                   
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-input formControlName="initialBenzene"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input formControlName="finalBenzene"></ion-input>
+                </ion-item>
+              </ion-list>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">
+                Tester's Initials
+              </ion-label>
+              <ion-input formControlName="testerInitial">
+              </ion-input>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              Section III Hot Work Permit
+            </ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-item>
+              <ion-label>
+                Type of work
+              </ion-label>
+              <ion-select placeholder="Select One" formControlName="workType">
+                <ion-select-option value="wcg">Welding, Cutting, or Grinding </ion-select-option>
+                <ion-select-option value="hpt">Heat/Spark Producing Tools </ion-select-option>
+                <ion-select-option value="et">Electric Tools </ion-select-option>
+                <ion-select-option value="sb">Sand Blasting   </ion-select-option>
+                <ion-select-option value="pt">Pneumatic Tools   </ion-select-option>
+                <ion-select-option value="epwe">Engine Powered Work Equipment</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item *ngFor="let sec of section3">
+              <ion-label>
+                {{sec.val}}               
+              </ion-label>
+              <ion-select placeholder="Select One" formControlName="{{sec.key}}">
+                <ion-select-option value="yes">Yes</ion-select-option>
+                <ion-select-option value="na">NA</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              Section IV Line & Equipment Opening
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item *ngFor="let sec of section4">
+              <ion-label>
+                {{sec.val}}               
+              </ion-label>
+              <ion-select placeholder="Select One" formControlName="{{sec.key}}">
+                <ion-select-option value="yes">Yes</ion-select-option>
+                <ion-select-option value="na">NA</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">
+                Who was notified?
+              </ion-label>
+              <ion-input formControlName="personOfNotice"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">
+                Time of notice
+              </ion-label>
+              <ion-input formControlName="noticeTime"></ion-input>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Section V Energy Control (Lockout/Tagout)</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+                <ion-item>
+                  <ion-label position="floating">
+                    Name of equipment taken out of service
+                  </ion-label>
+                  <ion-input formControlName="equipmentName"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">
+                    Initials of Person Locking or tagging equip.
+                  </ion-label>
+                  <ion-input formControlName="personInitial"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">
+                    Time equip. placed out of service
+                  </ion-label>
+                  <ion-input formControlName="equipmentOutTime"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label>
+                    All employees notified equip. is out of service (Y/N)
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="outAllNotified">
+                    <ion-select-option value="yes">Yes</ion-select-option>
+                    <ion-select-option value="na">NA</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">
+                    Initials of person removing Locks  or Tags
+                  </ion-label>
+                  <ion-input formControlName="removePersonInitial"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">
+                    Time equip. placed back in service
+                  </ion-label>
+                  <ion-input formControlName="equipmentInTime"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label>
+                    All employees notified equip. back in service (Y/N)
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="inAllNotified">
+                    <ion-select-option value="yes">Yes</ion-select-option>
+                    <ion-select-option value="na">NA</ion-select-option>
+                  </ion-select>
+                </ion-item>
+          </ion-card-content>
+        </ion-card>
+
+          <ion-button color="primary" (click)="submit(filterForm)">Submit</ion-button>
+          </div>    
+          
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

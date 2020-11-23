@@ -27,7 +27,7 @@ export class AwsService {
           ContentType: contentType
       };
 
-      bucket.upload(params, function (err, data) {
+      var upload = bucket.upload(params, function (err, data) {
           if (err) {
               console.log('There was an error uploading your file: ', err);
               return false;
@@ -47,6 +47,7 @@ export class AwsService {
           console.log('Successfully uploaded file.', data);
           return true;
       });
+    return upload.promise();
   }
 }
 

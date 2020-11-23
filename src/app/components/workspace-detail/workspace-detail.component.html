@@ -30,7 +30,14 @@
       Start
     </ion-button>
     <h3 *ngIf="check(paperwork)">
-      <ion-icon size="large" name="cloud-done-sharp"></ion-icon>
+      <ion-icon size="large" name="cloud-done-sharp" *ngIf="paperwork.paperworkId == 13"></ion-icon>
+    </h3>
+
+    <ion-button (click)="openWp()" *ngIf="paperwork.paperworkId == 14 && !check(paperwork)">
+      Start
+    </ion-button>
+    <h3 *ngIf="check(paperwork)">
+      <ion-icon size="large" name="cloud-done-sharp" *ngIf="paperwork.paperworkId == 14"></ion-icon>
     </h3>
   </ion-card>
 

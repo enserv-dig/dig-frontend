@@ -31,9 +31,10 @@ import {DpDatePickerModule} from 'ng2-date-picker';
 import { WorkspaceComponent } from './components/workspace/workspace.component';
 import { WorkspaceDetailComponent } from './components/workspace-detail/workspace-detail.component';
 import { AwsService } from './services/aws.service';
+import { WorkPermitComponent } from './components/forms/work-permit/work-permit.component';
 
 @NgModule({
-  declarations: [AppComponent, HomepageComponent, LoginComponent, SignupComponent, ClientModalComponent, FacilityModalComponent, PipelineModalComponent, ClientComponent, FacilityComponent, DigComponent, PipelineComponent, DigSelectComponent, WorkflowComponent, WorkflowDetailComponent, SecFormComponent, WorkspaceComponent, WorkspaceDetailComponent],
+  declarations: [AppComponent, HomepageComponent, LoginComponent, SignupComponent, ClientModalComponent, FacilityModalComponent, PipelineModalComponent, ClientComponent, FacilityComponent, DigComponent, PipelineComponent, DigSelectComponent, WorkflowComponent, WorkflowDetailComponent, SecFormComponent, WorkPermitComponent, WorkspaceComponent, WorkspaceDetailComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, NgxDatatableModule, ReactiveFormsModule, DpDatePickerModule],
   providers: [

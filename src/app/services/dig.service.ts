@@ -58,6 +58,76 @@ export class DigService {
     );
   }
 
+  createWorkPermit(form, digId) {
+    return this.http.post('http://localhost:8080/wpf', 
+    {
+      digId: digId,
+      dateFrom: form.dateFrom,
+      dateTo: form.dateTo,
+      confinedSpace: form.confinedSpace,
+      entryPurpose: form.entryPurpose,
+      isolated: form.isolated,
+      atmosphereTested: form.atmosphereTested,
+      otherPermits: form.otherPermits,
+      testEquipmentRequired: form.testEquipmentRequired,
+      signsUsed: form.signsUsed,
+      meetingDone: form.meetingDone,
+      ventilationMethod: form.ventilationMethod,
+      communicationMethod: form.communicationMethod,
+      retrievalEquipment: form.retrievalEquipment,
+      airMonitoring: form.airMonitoring,
+      lightingRequired: form.lightingRequired,
+      physicalHazards: form.physicalHazards,
+      supervisorName: form.supervisorName,
+      safetyAttendentName: form.safetyAttendentName,
+      safetyAttendentNameAlt: form.safetyAttendentNameAlt,
+      entrantName: form.entrantName,
+      clockIn: form.clockIn,
+      clockOut: form.clockOut,
+      initialOxygen: form.initialOxygen,
+      finalOxygen: form.finalOxygen,
+      initialFlammability: form.initialFlammability,
+      finalFlammability: form.finalFlammability,
+      initialH2S: form.initialH2S,
+      finalH2S: form.finalH2S,
+      initialCO: form.initialCO,
+      finalCO: form.finalCO,
+      initialBenzene: form.initialBenzene,
+      finalBenzene: form.finalBenzene,
+      testerInitial: form.testerInitial,
+      workType: form.workType,
+      ventsProtected: form.ventsProtected,
+      freeFromFlame: form.freeFromFlame,
+      hotGuards: form.hotGuards,
+      valvesChecked: form.valvesChecked,
+      floorProtected: form.floorProtected,
+      fireWatchAssigned: form.fireWatchAssigned,
+      fireEquipmentInspected: form.fireEquipmentInspected,
+      atmosphereSafe: form.atmosphereSafe,
+      exchangeInitiated: form.exchangeInitiated,
+      lineIdentified: form.lineIdentified,
+      lineDrained: form.lineDrained,
+      lineCleaned: form. lineCleaned,
+      jumperRequired: form.jumperRequired,
+      blindsInPlace: form.blindsInPlace,
+      outOfServiceNotice: form.outOfServiceNotice,
+      personOfNotice: form.personOfNotice,
+      noticeTime: form.noticeTime,
+      equipmentName: form.equipmentName,
+      personInitial: form.personInitial,
+      equipmentOutTime: form.equipmentOutTime,
+      outAllNotified: form.outAllNotified,
+      removePersonInitial: form.removePersonInitial,
+      equipmentInTime: form.equipmentInTime,
+      inAllNotified: form.inAllNotified
+    }
+    ).pipe(
+      map(response => {
+        console.log(response);
+      })
+    )
+  }
+
   createExcavationWorksheet(form, digId) {
     return this.http.post('http://localhost:8080/sec', 
     {
@@ -94,8 +164,6 @@ export class DigService {
       contractorAware: form.contractorAware,
       checklistPriorProvided: form.checklistPriorProvided,
       contractorAdvised: form.contractorAdvised,
-
-
     }
     ).pipe(
       map(response => {

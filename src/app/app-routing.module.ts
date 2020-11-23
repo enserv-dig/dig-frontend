@@ -4,6 +4,7 @@ import { ClientComponent } from './components/client/client.component';
 import { DigComponent } from './components/dig/dig.component';
 import { FacilityComponent } from './components/facility/facility.component';
 import { SecFormComponent } from './components/forms/sec-form/sec-form.component';
+import { WorkPermitComponent } from './components/forms/work-permit/work-permit.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
 import { PipelineComponent } from './components/pipeline/pipeline.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'workspace', component: WorkspaceComponent, pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'workspace/:id', component: WorkspaceDetailComponent, pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'form/sec/:id', component: SecFormComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'form/work-permit/:id', component: WorkPermitComponent, pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'workflow/:id', component: WorkflowDetailComponent, pathMatch: 'full', canActivate: [AuthGuard] },
 
   { path: '', redirectTo: '/login', pathMatch: 'full'},

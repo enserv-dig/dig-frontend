@@ -31,7 +31,6 @@ export class SecFormComponent implements OnInit {
     enableMonthSelector: true,
     multipleYearsNavigateBy: 10,
     showMultipleYearsNavigation: true,
- 
   };
   
   constructor(private fb: FormBuilder, private digService: DigService, private route: ActivatedRoute, private router: Router, private toastController: ToastController ) { 

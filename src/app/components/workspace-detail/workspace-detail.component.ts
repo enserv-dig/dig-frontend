@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 import { AwsService } from 'src/app/services/aws.service';
 import { DigService } from 'src/app/services/dig.service';
 import { threadId } from 'worker_threads';
@@ -18,7 +19,7 @@ export class WorkspaceDetailComponent implements OnInit {
   selectedFiles: FileList;
   complete: any;
 
-  constructor(private route: ActivatedRoute, private digService: DigService, private awsService: AwsService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private digService: DigService, private awsService: AwsService, private router: Router, private loadingController: LoadingController) { }
 
   
   ngOnInit() {}
@@ -46,9 +47,16 @@ export class WorkspaceDetailComponent implements OnInit {
 
   upload(paperworkType) {
     const file = this.selectedFiles.item(0);
-    let data = this.awsService.uploadFile(file);
-    this.digService.createUpload(paperworkType, file.name, this.digId).subscribe(datas => {
-    })
+    let loader = this.presentLoading();
+    let data = this.awsService.uploadFile(file).then(done => {
+      console.log("done");
+      this.digService.createUpload(paperworkType, file.name, this.digId).subscribe(async datas => {
+        (await loader).dismiss();
+        this.ionViewWillEnter();
+      })
+    });
+
+
     }
     
     selectFile(event) {
@@ -67,6 +75,21 @@ export class WorkspaceDetailComponent implements OnInit {
 
   openSec(){
     this.router.navigateByUrl('/form/sec/'+this.digId);
+  }
+
+  openWp() {
+    this.router.navigateByUrl('/form/work-permit/'+this.digId);
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 2000
+    });
+    await loading.present();
+
+  return loading;
   }
 
 
