@@ -39,6 +39,45 @@
     <h3 *ngIf="check(paperwork)">
       <ion-icon size="large" name="cloud-done-sharp" *ngIf="paperwork.paperworkId == 14"></ion-icon>
     </h3>
+
+    <ion-button (click)="openPi()" *ngIf="paperwork.paperworkId == 15 && !check(paperwork)">
+      Start
+    </ion-button>
+    <h3 *ngIf="check(paperwork)">
+      <ion-icon size="large" name="cloud-done-sharp" *ngIf="paperwork.paperworkId == 15"></ion-icon>
+    </h3>
+
+
+    <ion-button (click)="openSi()" *ngIf="paperwork.paperworkId == 16 && !check(paperwork)">
+      Start
+    </ion-button>
+    <h3 *ngIf="check(paperwork)">
+      <ion-icon size="large" name="cloud-done-sharp" *ngIf="paperwork.paperworkId == 16"></ion-icon>
+    </h3>
+
+    <ion-button (click)="openEaf()" *ngIf="paperwork.paperworkId == 17 && !check(paperwork)">
+      Start
+    </ion-button>
+    <h3 *ngIf="check(paperwork)">
+      <ion-icon size="large" name="cloud-done-sharp" *ngIf="paperwork.paperworkId == 17"></ion-icon>
+    </h3>
+  
   </ion-card>
+
+<!--Camera Test-->
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="camera" (click)="addPhotoToGallery()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-grid>
+    <ion-row>
+    <ion-col size="2" 
+      *ngFor="let photo of photoService.photos; index as position">
+        <ion-img [src]="photo.webviewPath"></ion-img>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

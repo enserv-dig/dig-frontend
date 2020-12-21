@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { AwsService } from 'src/app/services/aws.service';
 import { DigService } from 'src/app/services/dig.service';
+import { PhotoService } from 'src/app/services/photo.service';
 import { threadId } from 'worker_threads';
 
 
@@ -19,10 +20,15 @@ export class WorkspaceDetailComponent implements OnInit {
   selectedFiles: FileList;
   complete: any;
 
-  constructor(private route: ActivatedRoute, private digService: DigService, private awsService: AwsService, private router: Router, private loadingController: LoadingController) { }
+  constructor(private route: ActivatedRoute, private digService: DigService,
+              private awsService: AwsService, private router: Router,
+              private loadingController: LoadingController,
+              private photoService: PhotoService) { }
 
   
-  ngOnInit() {}
+  async ngOnInit() {
+    await this.photoService.loadSaved();
+  }
 
   ionViewWillEnter() {
     this.route.paramMap.subscribe(data => {
@@ -31,15 +37,12 @@ export class WorkspaceDetailComponent implements OnInit {
         this.digService.getDig(this.digId).subscribe(data => {
           this.dig = data['dig'];
           this.paperworks = data['paperworks'];
-          console.log(this.paperworks);
         })
         this.digService.getAllUploads().subscribe(ups => {
-          console.log(ups);
           this.complete = ups;
           this.complete  = this.complete.filter(upload => {
             return (upload.dig.digId == this.digId);
           })
-          console.log(this.complete);
         })
       }
     })
@@ -49,7 +52,6 @@ export class WorkspaceDetailComponent implements OnInit {
     const file = this.selectedFiles.item(0);
     let loader = this.presentLoading();
     let data = this.awsService.uploadFile(file).then(done => {
-      console.log("done");
       this.digService.createUpload(paperworkType, file.name, this.digId).subscribe(async datas => {
         (await loader).dismiss();
         this.ionViewWillEnter();
@@ -81,6 +83,18 @@ export class WorkspaceDetailComponent implements OnInit {
     this.router.navigateByUrl('/form/work-permit/'+this.digId);
   }
 
+  openPi() {
+    this.router.navigateByUrl('/form/pipe-inspect/'+this.digId);
+  }
+
+  openSi() {
+    this.router.navigateByUrl('/form/corrosion-inspect/'+this.digId);
+  }
+
+  openEaf() {
+    this.router.navigateByUrl('/form/encroachment-agree/'+this.digId);
+  }
+
   async presentLoading() {
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
@@ -90,6 +104,10 @@ export class WorkspaceDetailComponent implements OnInit {
     await loading.present();
 
   return loading;
+  }
+
+  addPhotoToGallery() {
+    this.photoService.addNewToGallery();
   }
 
 

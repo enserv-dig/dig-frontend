@@ -1,0 +1,459 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Dig | Encroachment Agreement Form</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+        <!-- <ion-col size="3">
+          <pre>{{ filterForm.value | json }}</pre>
+        </ion-col> -->
+
+        <ion-col size="10" offset="1">
+          <div [formGroup]="filterForm" (ngSubmit)="submit()">
+
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Exposed Pipe Inspection</ion-card-title>
+              </ion-card-header>
+
+                Date
+                <input type="text" 
+                #dateFromDp="dpDayPicker"
+                [dpDayPicker]="dayPickerConfig"
+                [theme]="'dp-material'"
+                formControlName="dateFrom"
+                [mode]="'day'"
+                (onChange)="date = $event" />
+
+              <ion-item>
+                <ion-label position="floating">Pipeline Company name</ion-label>
+                <ion-textarea formControlName="companyName"></ion-textarea>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Pipeline Identification / Section Number</ion-label>
+                <ion-textarea formControlName="sectionNumber"></ion-textarea>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Legal Description (Section, Township, Range, Lot, Block, Abstract, Address)</ion-label>
+                <ion-textarea formControlName="legalDescription"></ion-textarea>
+              </ion-item>
+
+              <ion-item>
+                <ion-item>
+                  <ion-label position="floating">County</ion-label>
+                  <ion-textarea formControlName="county"></ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">State</ion-label>
+                  <ion-textarea formControlName="state"></ion-textarea>
+                </ion-item>
+              </ion-item>
+
+              <ion-item>
+                <ion-item>
+                  <ion-label position="floating">Alignment Sheet Number</ion-label>
+                  <ion-textarea formControlName="alignmentSheetNumber"></ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Mile Post (Engineering Station Number)</ion-label>
+                  <ion-textarea formControlName="milePost"></ion-textarea>
+                </ion-item> 
+
+                <ion-item>
+                  <ion-label position="floating">Tract Number</ion-label>
+                  <ion-textarea formControlName="tractNumber"></ion-textarea>
+                </ion-item> 
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Type of encroachment
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="encroachmentType">
+                  <ion-select-option value="roadway">Roadway</ion-select-option>
+                  <ion-select-option value="driveway">Driveway</ion-select-option>
+                  <ion-select-option value="parkingLot">Parking Lot</ion-select-option>
+                  <ion-select-option value="accessRoad">Access Road</ion-select-option>
+                  <ion-select-option value="equipmentCrossing">Equipment Crossing</ion-select-option>
+                  <ion-select-option value="gasLine">Gas Line</ion-select-option>
+                  <ion-select-option value="waterLine">Water Line</ion-select-option>
+                  <ion-select-option value="electricLine">Electric Line</ion-select-option>
+                  <ion-select-option value="fiberOpticCable">Fiber Optic Cable</ion-select-option>
+                  <ion-select-option value="drainTile">Drain Tile</ion-select-option>
+                  <ion-select-option value="telephoneCable">Telephone Cable</ion-select-option>
+                  <ion-select-option value="televisionCable">Television Cable</ion-select-option>
+                  <ion-select-option value="other">Other</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+            </ion-card>
+
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>PREVIOUS PIPELINE LOCATE ACTIVITIES</ion-card-title>
+              </ion-card-header>
+
+              <ion-card-content>
+
+                <ion-item>
+                  <ion-item>
+                    <ion-label position="floating">Locate Ticket Number</ion-label>
+                    <ion-textarea formControlName="ticketNumber"></ion-textarea>
+                  </ion-item> 
+
+                <ion-item>
+                    <ion-label position="floating">Person who called</ion-label>
+                    <ion-textarea formControlName="callPerson"></ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Person dispatched</ion-label>
+                  <ion-textarea formControlName="dispatchPerson"></ion-textarea>
+                </ion-item> 
+              </ion-item>
+              <ion-item>
+                <ion-label>
+                  Type of encroachment
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="activity">
+                  <ion-select-option value="flaggedLine">Flagged/Staked Line</ion-select-option>
+                  <ion-select-option value="probedLine">Probed Line for Depth</ion-select-option>
+                  <ion-select-option value="markedCables">Marked C.P. Cables</ion-select-option>
+                  <ion-select-option value="witnessedExcavation">Witnessed Excavation</ion-select-option>
+                  <ion-select-option value="paintedLine">Painted Line</ion-select-option>
+                  <ion-select-option value="gaveDepth">Gave Locator Depth</ion-select-option>
+                  <ion-select-option value="exposedLine">Exposed Line</ion-select-option>
+                  <ion-select-option value="other">Other</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-item>
+                  <ion-label position="floating">Remarks or instructions given</ion-label>
+                  <ion-textarea formControlName="ticketNumber"></ion-textarea>
+                </ion-item> 
+
+                <ion-item>
+                  <ion-label position="floating">Person dispatched</ion-label>
+                  <ion-textarea formControlName="dispatchPerson"></ion-textarea>
+                </ion-item> 
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Follow up action
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="followUpAction">
+                  <ion-select-option value="yes">Yes</ion-select-option>
+                  <ion-select-option value="no">No</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Explaination</ion-label>
+                <ion-textarea formControlName="explaination"></ion-textarea>
+              </ion-item> 
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>
+                  ENCROACHING PARTY/CONTACT INFORMATION
+                </ion-card-title>
+              </ion-card-header>
+
+              <ion-card-content>
+                <ion-item>
+                  <ion-label>
+                    Person met at location
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="personMet">
+                    <ion-select-option value="landowner">Land Owner</ion-select-option>
+                    <ion-select-option value="contractor">Contractor</ion-select-option>
+                    <ion-select-option value="encroachingParty">Encroaching Party</ion-select-option>
+                    <ion-select-option value="other">Other</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item>
+                  <ion-item>
+                    <ion-label position="floating">Name</ion-label>
+                    <ion-textarea formControlName="partyName"></ion-textarea>
+                  </ion-item> 
+
+                  <ion-item>
+                    <ion-label position="floating">Title</ion-label>
+                    <ion-textarea formControlName="partyTitle"></ion-textarea>
+                  </ion-item> 
+
+                  <ion-item>
+                    <ion-label position="floating">Company</ion-label>
+                    <ion-textarea formControlName="partyCompany"></ion-textarea>
+                  </ion-item> 
+
+                  <ion-item>
+                    <ion-label position="floating">Phone Number</ion-label>
+                    <ion-textarea formControlName="partyPhone"></ion-textarea>
+                  </ion-item> 
+                </ion-item>
+
+                <ion-item>
+                  <ion-item>
+                    <ion-label position="floating">Address</ion-label>
+                    <ion-textarea formControlName="partyAddress"></ion-textarea>
+                  </ion-item> 
+
+                  <ion-item>
+                    <ion-label position="floating">City</ion-label>
+                    <ion-textarea formControlName="partyCity"></ion-textarea>
+                  </ion-item> 
+
+                  <ion-item>
+                    <ion-label position="floating">State</ion-label>
+                    <ion-textarea formControlName="partyState"></ion-textarea>
+                  </ion-item> 
+
+                  <ion-item>
+                    <ion-label position="floating">Zip</ion-label>
+                    <ion-textarea formControlName="partyZip"></ion-textarea>
+                  </ion-item> 
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>
+                  STRUCTURE AND/OR ENCROACHMENT CROSSING DATA
+                </ion-card-title>
+                <ion-card-subtitle>
+                  ESN = Engineering Station Number Obtained from Alignment Sheet
+                </ion-card-subtitle>
+              </ion-card-header>
+
+              <ion-card-content>
+                <ion-item>
+                  <ion-item>
+                    <ion-label position="floating">Reference Point (Nearest C/L road, fence, etc.)</ion-label>
+                    <ion-textarea formControlName="referencePoint"></ion-textarea>
+                  </ion-item> 
+
+                <ion-item>
+                  <ion-label position="floating">Reference Point ESN</ion-label>
+                  <ion-textarea formControlName="referencePointEsn"></ion-textarea>
+                </ion-item> 
+              </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Distance and Direction from Reference </ion-label>
+                  <ion-textarea formControlName="distAndDirFromReference"></ion-textarea>
+                </ion-item> 
+
+                <ion-item>
+                  <ion-label position="floating">Calculated ESN of Crossing (Add/subtract distance to/from Reference Point ESN) </ion-label>
+                  <ion-textarea formControlName="calcEsnCrossing"></ion-textarea>
+                </ion-item> 
+
+                <ion-item>
+                  <ion-label position="floating">Size of Foreign Facility </ion-label>
+                  <ion-textarea formControlName="facilitySize"></ion-textarea>
+                </ion-item> 
+
+                <ion-item>
+                  <ion-label>
+                    Encased?
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="encased">
+                    <ion-select-option value="yes">Yes</ion-select-option>
+                    <ion-select-option value="no">No</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Encase Size </ion-label>
+                  <ion-textarea formControlName="encaseSize"></ion-textarea>
+                </ion-item> 
+
+                <ion-item>
+                  <ion-label>
+                    Casing Type
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="casingType">
+                    <ion-select-option value="steel">Steel</ion-select-option>
+                    <ion-select-option value="plastic">Plastic</ion-select-option>
+                    <ion-select-option value="other">Other</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Coating Type </ion-label>
+                  <ion-textarea formControlName="coatingType"></ion-textarea>
+                </ion-item> 
+            </ion-card-content>
+            </ion-card>
+
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>
+                  PIPELINE DATA
+                </ion-card-title>
+              </ion-card-header>
+
+              <ion-card-content>
+                <ion-item>
+                  <ion-label position="floating">Coating Type </ion-label>
+                  <ion-textarea formControlName="pipelineCoatingType"></ion-textarea>
+                </ion-item> 
+
+                <ion-item>
+                  <ion-label>
+                    Casing Type
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="pipelineCoatingCondition">
+                    <ion-select-option value="well">Well Bonded</ion-select-option>
+                    <ion-select-option value="partial">Partially Bonded</ion-select-option>
+                    <ion-select-option value="dis">Disbonded</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item>
+                  <ion-item>
+                    <ion-label position="floating">P/S at ground level </ion-label>
+                    <ion-textarea formControlName="psGround"></ion-textarea>
+                  </ion-item> 
+
+                  <ion-item>
+                    <ion-label position="floating">P/S at ditch level </ion-label>
+                    <ion-textarea formControlName="psDitch"></ion-textarea>
+                  </ion-item> 
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  Pipeline Condition
+                </ion-label>
+                <ion-select placeholder="Select One" formControlName="pipelineCondition">
+                  <ion-select-option value="likeNew">Like new</ion-select-option>
+                  <ion-select-option value="surfaceRust">Surface Rust</ion-select-option>
+                  <ion-select-option value="minorPitting">Minor Pitting</ion-select-option>
+                  <ion-select-option value="moderatePitting">Moderate Pitting</ion-select-option>
+                  <ion-select-option value="severePitting">Severe Pitting</ion-select-option>
+                </ion-select>
+              </ion-item>
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>
+                  TERMS OF AGREEMENT
+                </ion-card-title>
+              </ion-card-header>
+
+              <ion-card-content>
+                <ion-list>
+                  <ion-item>
+                    1.	The Agreement herein granted is subject to the existing easement rights of the Company.
+                  </ion-item>
+
+                  <ion-item>
+                    2.	The Encroaching Party will construct, maintain, relocate and remove the Agreement item at no expense to the Company.
+                  </ion-item>
+
+                  <ion-item>
+                    3.	The Encroaching Party must notify the Company at least 48 hours before work commences on or near the Company’s easement.  No work shall take place without the Company’s staff being given the opportunity to be present at the site.
+                  </ion-item>
+
+                  <ion-item>
+                    4.	The Encroaching Party shall supply such plans, surveys and drawings as the Company deems necessary.
+                  </ion-item>
+
+                  <ion-item>
+                    5.	The Agreement shall be revocable by the Company upon notice to the Encroaching Party and/or the owner of records.  The terms and conditions of this Agreement shall constitute covenants running with the land and be binding upon and inure to the benefits of the parties hereto, their successors and assigns.
+                  </ion-item>
+
+                  <ion-item>
+                    6.	The Encroaching Party agrees to indemnify, save and hold harmless the Company, its shareholders and their directors and employees, and the Company’s subcontractors against any and all claims for damages, injury or death arising by reason of the encroachment, its use and maintenance unless caused by the sole negligence of the Company.
+                  </ion-item>
+
+                  <ion-item>
+                    7.	Encroaching Party agrees that the Company may remove, at the Encroaching Party’s expense, any Agreement items or portion thereof, if in the Company’s judgment, it is reasonably necessary to do so in order to operate, construct, alter, maintain, repair or replace its facilities located within the easement, or in order to construct or install new facilities.  Should the Company remove any such Agreement items, or portions thereof, the Company will not be liable to the Encroaching Party or the Encroaching Party’s successors or assigns for any damages resulting by reason of such removal.
+                  </ion-item>
+
+                  <ion-item>
+                    8.	The Company reserves the right to alter the specifications of this Agreement at any time, provided that you will be given a reasonable amount of time to comply, at your expense, with any new requirements imposed after the construction of the Agreement items.
+                  </ion-item>
+
+                  <ion-item>
+                    9.	All Agreement items shall be constructed and maintained to comply with all laws and industry standards.
+                  </ion-item>
+
+                  <ion-item>
+                    10.	The permission herein granted by the Company is limited to its interest and authority in the subject land and the Encroaching Party acknowledges the possible obligation to obtain the required permission from other parties of interest or the Government.  The Company permits this item only to the extent it may do so by law.
+                  </ion-item>
+
+                </ion-list>
+
+                <ion-item>
+                  <ion-label position="floating">Your Company Contact </ion-label>
+                  <ion-textarea formControlName="companyContact"></ion-textarea>
+                </ion-item> 
+
+                <ion-item>
+                  <ion-label position="floating">In the Event of an Emergency </ion-label>
+                  <ion-textarea formControlName="emergency"></ion-textarea>
+                </ion-item> 
+
+                <ion-item>
+                  <ion-label position="floating">Company Representative - Printed Name </ion-label>
+                  <ion-textarea formControlName="companyRep"></ion-textarea>
+                </ion-item> 
+
+                <ion-item>
+                  <ion-label position="floating">Phone Number</ion-label>
+                  <ion-textarea formControlName="phoneNumber"></ion-textarea>
+                </ion-item> 
+
+                <ion-item>
+                  <ion-card-subtitle>
+                    I acknowledge that I have reviewed the Conditions, Terms and Guidelines of this Agreement with a Company representative and agree to be bound by the provisions herein.
+                  </ion-card-subtitle>
+                  <ion-item>
+                    <ion-label position="floating">Encroaching Party - Printed Name </ion-label>
+                    <ion-textarea formControlName="encroachingPartyRep"></ion-textarea>
+                  </ion-item> 
+                </ion-item>
+
+                <ion-item>
+                  <ion-card-subtitle>
+                    I acknowledge that I have reviewed the Conditions, Terms and Guidelines of this Agreement with a Company representative and agree to be bound by the provisions in performance of my work.
+                  </ion-card-subtitle>
+                  <ion-item>
+                    <ion-label position="floating">Person Met at Location, Authorized by Encroaching Party  - Printed Name </ion-label>
+                    <ion-textarea formControlName="personMetRep"></ion-textarea>
+                  </ion-item> 
+                </ion-item>
+
+              </ion-card-content>
+            </ion-card>
+          <ion-button color="primary" (click)="submit(filterForm)">Submit</ion-button>
+          </div>
+        </ion-col>
+
+
+
+    </ion-row>
+  </ion-grid>
+</ion-content>

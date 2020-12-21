@@ -14,7 +14,7 @@ export class WorkspaceComponent implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
-    this.digService.getAllDigs().subscribe(data => {
+    this.digService.getDigsWithWork().subscribe(data => {
       this.digs = data;
       console.log(this.digs);
     })

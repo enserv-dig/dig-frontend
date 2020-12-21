@@ -1,0 +1,276 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Dig | Internal Corrosion Inspection</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+
+        <ion-col size="10" offset="1">
+          <div [formGroup]="filterForm" (ngSubmit)="submit()">
+
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Internal Corrosion Inspection</ion-card-title>
+              </ion-card-header>
+
+              <ion-card-content>
+                Date
+                <input type="text" 
+                #dateFromDp="dpDayPicker"
+                [dpDayPicker]="dayPickerConfig"
+                [theme]="'dp-material'"
+                formControlName="dateFrom"
+                [mode]="'day'"
+                (onChange)="date = $event" />
+
+                <ion-item>
+                  <ion-label position="floating">Pipeline Segment Name</ion-label>
+                  <ion-textarea formControlName="segmentName"></ion-textarea>
+                </ion-item>
+  
+                <ion-item>
+                  <ion-label>
+                    Is person conducting task qualified in accordance with the CRCT Operator Qualification Program?  If no, do not proceed with inspection.                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="inspectorQualified">
+                    <ion-select-option value="yes">Yes</ion-select-option>
+                    <ion-select-option value="no">No</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label>
+                    If the person conducting the task is not qualified in accordance with CRCT’s Operator Qualification Program, was he/she under the direct supervision of a qualified individual. If yes, the non-qualified individual shall sign below stating that they were in the direct supervision, as defined in CRCT’s Operator Qualification program, for the duration of the performance of the task.
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="supervisorApproved">
+                    <ion-select-option value="yes">Yes</ion-select-option>
+                    <ion-select-option value="no">No</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card>
+              <ion-card-content>
+
+                <ion-item>
+                  <ion-label position="floating">Why was this pipe removed?  </ion-label>
+                  <ion-textarea formControlName="removeReason"></ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label>
+                    Location
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="location">
+                    <ion-select-option value="offshore">Offshore</ion-select-option>
+                    <ion-select-option value="onshore">Onshore</ion-select-option>
+                    <ion-select-option value="waterBody"> Inland Body of Water</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Location Name  </ion-label>
+                  <ion-textarea formControlName="locationName"></ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label>
+                    Pipeline within Right-of-Way of
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="inWayOf">
+                    <ion-select-option value="railroad">Railroad</ion-select-option>
+                    <ion-select-option value="street">Street</ion-select-option>
+                    <ion-select-option value="highway"> Highway</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">city  </ion-label>
+                  <ion-textarea formControlName="city"></ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">County </ion-label>
+                  <ion-textarea formControlName="county"></ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">State </ion-label>
+                  <ion-textarea formControlName="state"></ion-textarea>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>
+                  Pipe
+                </ion-card-title>
+              </ion-card-header>
+
+              <ion-card-content>
+                <ion-item>
+                  <ion-label>
+                    Does the pipeline have cathodic protection?
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="cathodicProtection">
+                    <ion-select-option value="yes">Yes</ion-select-option>
+                    <ion-select-option value="no">No</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">If so, what is the pipe/soil reading?  </ion-label>
+                  <ion-textarea formControlName="pipeReading"></ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label>
+                    Is pipe bare or coated?
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="bareOrCoated">
+                    <ion-select-option value="bare">Bare</ion-select-option>
+                    <ion-select-option value="coated">Coated</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Type of coating  </ion-label>
+                  <ion-textarea formControlName="coatingType"></ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Condition of coating  </ion-label>
+                  <ion-textarea formControlName="coatingCondition"></ion-textarea>
+                </ion-item>   
+
+                <ion-item>
+                  <ion-label position="floating">Describe external condition of pipeline  </ion-label>
+                  <ion-textarea formControlName="pipelineCondition"></ion-textarea>
+                </ion-item>  
+
+                <ion-item>
+                  Commodity Transported
+                  <ion-item>
+                    <ion-label position="floating">Outer Diameter (inches) </ion-label>
+                    <ion-textarea formControlName="outerDiameter"></ion-textarea>
+                  </ion-item>  
+                  
+                  <ion-item>
+                    <ion-label position="floating">Wall Thickness (inches)  </ion-label>
+                    <ion-textarea formControlName="wallThickness"></ion-textarea>
+                  </ion-item>  
+                </ion-item>
+
+                <ion-item>
+                  Length Removed
+                  <ion-item>
+                    <ion-label position="floating">From </ion-label>
+                    <ion-textarea formControlName="from"></ion-textarea>
+                  </ion-item>  
+                  
+                  <ion-item>
+                    <ion-label position="floating">To  </ion-label>
+                    <ion-textarea formControlName="to"></ion-textarea>
+                  </ion-item>  
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Grade  </ion-label>
+                  <ion-textarea formControlName="grade"></ion-textarea>
+                </ion-item>  
+
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>
+                  INTERNAL CORROSION
+                </ion-card-title>
+
+                <ion-card-subtitle>
+                  If pipe was cut for any reason, an internal inspection must be done.                </ion-card-subtitle>
+              </ion-card-header>
+
+              <ion-card-content>
+                <ion-item>
+                  <ion-label position="floating">Describe internal condition  </ion-label>
+                  <ion-textarea formControlName="internalConditionDesc"></ion-textarea>
+                </ion-item>  
+
+                <ion-item>
+                  <ion-label>
+                    Internal Condition Selections
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="internalCondition">
+                    <ion-select-option value="none">None</ion-select-option>
+                    <ion-select-option value="scale">Scale</ion-select-option>
+                    <ion-select-option value="pitting">Pitting</ion-select-option>
+                    <ion-select-option value="rust">Rust</ion-select-option>
+                    <ion-select-option value="lossOfWallThickness">General Loss of Wall Thickness</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item>
+                  <ion-item>
+                    <ion-label position="floating">Length of Corroded Area (feet)  </ion-label>
+                    <ion-textarea formControlName="corrLength"></ion-textarea>
+                  </ion-item>  
+                  <ion-item>
+                    <ion-label position="floating">Deepest Internal Defect (inches)  </ion-label>
+                    <ion-textarea formControlName="deepestDefect"></ion-textarea>
+                  </ion-item>  
+                  <ion-item>
+                    <ion-label position="floating">Percent of Wall Thickness Loss (%)  </ion-label>
+                    <ion-textarea formControlName="wallThicknessLossPercentage"></ion-textarea>
+                  </ion-item>  
+                  <ion-item>
+                    <ion-label position="floating">Largest Corrosion Pit Diameter (inches)  </ion-label>
+                    <ion-textarea formControlName="largestCorrPitDiameter"></ion-textarea>
+                  </ion-item>  
+              </ion-item>
+
+                <ion-item>
+                  <ion-label>
+                    Was Foreign Material sent to Lab for analysis?
+                  </ion-label>
+                  <ion-select placeholder="Select One" formControlName="sentToLab">
+                    <ion-select-option value="yes">Yes</ion-select-option>
+                    <ion-select-option value="no">No</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Name of Lab </ion-label>
+                  <ion-textarea formControlName="labName"></ion-textarea>
+                </ion-item>  
+                <ion-item>
+                  <ion-label position="floating">Address of Lab </ion-label>
+                  <ion-textarea formControlName="labAddress"></ion-textarea>
+                </ion-item> 
+
+                <ion-item>
+                  <ion-label position="floating">Completed By </ion-label>
+                  <ion-textarea formControlName="completedBy"></ion-textarea>
+                </ion-item> 
+
+              </ion-card-content>
+            </ion-card>
+
+            <ion-button color="primary" (click)="submit(filterForm)">Submit</ion-button>
+          </div>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+

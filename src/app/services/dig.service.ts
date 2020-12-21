@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Dig } from '../commons/dig';
-import { Facility } from '../commons/facility';
+import {environment} from '../../environments/environment';
 
 
 @Injectable({
@@ -11,39 +11,42 @@ import { Facility } from '../commons/facility';
 export class DigService {
 
   @Output() addItem = new EventEmitter();
+
+
+  environmentbackendUrl = 'http://ec2-18-222-177-129.us-east-2.compute.amazonaws.com:8080';
   
   constructor(private http: HttpClient) { }
 
   uploadCsv(data: String[]) {
-    return this.http.post<Dig[]>('http://localhost:8080/dig', {data}).pipe(
+    return this.http.post<Dig[]>(this.environmentbackendUrl + '/dig', {data}).pipe(
       map(response => {
       })
     );
   }
 
   createClient(clientName: String, clientActive: String) {
-    return this.http.post<Client>('http://localhost:8080/client', {clientName,clientActive}).pipe(
+    return this.http.post<Client>(this.environmentbackendUrl + '/client', {clientName,clientActive}).pipe(
       map(response => {
       })
     );
   }
 
   createFacility(facilityName: String, facilityStatus: String, client: String) {
-    return this.http.post('http://localhost:8080/facility', {facilityName,facilityStatus, client}).pipe(
+    return this.http.post(this.environmentbackendUrl + '/facility', {facilityName,facilityStatus, client}).pipe(
       map(response => {
       })
     );
   }
 
   createPipeline(pipelineName: String, activePipeline: String, facilityId: Number) {
-    return this.http.post('http://localhost:8080/pipeline', {pipelineName, activePipeline, facilityId}).pipe(
+    return this.http.post(this.environmentbackendUrl + '/pipeline', {pipelineName, activePipeline, facilityId}).pipe(
       map(response => {
       })
     )
   }
 
   createWorkflow(workflowName: String, digIds: any) {
-    return this.http.post('http://localhost:8080/workflow', {workflowName, digIds}).pipe(
+    return this.http.post(this.environmentbackendUrl + '/workflow', {workflowName, digIds}).pipe(
       map(response => {
         console.log(digIds);
       })
@@ -51,15 +54,142 @@ export class DigService {
   }
 
   createUpload(tag: String, fileName: String, digId: Number) {
-    return this.http.post('http://localhost:8080/upload', {tag, fileName, digId}).pipe(
+    return this.http.post(this.environmentbackendUrl + '/upload', {tag, fileName, digId}).pipe(
       map(response => {
         console.log(response);
       })
     );
   }
 
+  createPipeInspection(form, digId) {
+    return this.http.post(this.environmentbackendUrl + '/pif',
+    {
+      digId: digId,
+      inspectionDate: form.dateFrom,
+      location: form.location,
+      inspectionName: form.inspectionName,
+      exposeReason: form.exposeReason,
+      inspectorQualified: form.inspectorQualified,
+      cathodicProtection: form.cathodicProtection,
+      pipeReading: form.pipeReading,
+      bareOrCoated: form.bareOrCoated,
+      coatingType: form.coatingType,
+      coatingCondition: form.coatingCondition,
+      pipelineCondition: form.pipelineCondition,
+      internalPipelineCondition: form.internalPipelineCondition,
+      signature: form.signature,
+      company: form.company,
+      title: form.title
+    }).pipe(
+      map(response => {
+        console.log(response);
+      })
+    )
+  }
+
+  createEncroachmentAgree(form, digId) {
+    return this.http.post(this.environmentbackendUrl + '/eaf',
+    {
+      digId: digId,
+      dateFrom: form.digFrom,
+      companyName: form.companyName,
+      sectionNumber: form.sectionNumber,
+      legalDescription: form.legalDescription,
+      county: form.county,
+      state: form.state,
+      alignmentSheetNumber: form.alignmentSheetNumber,
+      milePost: form.milePost,
+      tractNumber: form.tractNumber,
+      encroachmentType: form.encroachmentType,
+      ticketNumber: form.ticketNumber,
+      callPerson: form.callPerson,
+      dispatchPerson: form.dispatchPerson,
+      activity: form.activity,
+      remarks: form.remarks,
+      followUpAction: form.followUpAction,
+      explaination: form.explaination,
+      personMet: form.personMet,
+      partyName: form.partyName,
+      partyTitle: form.partyTitle,
+      partyCompany: form.partyCompany,
+      partyAddress: form.partyAddress,
+      partyCity: form.partyCity,
+      partyState: form.partyState,
+      partyZip: form.partyZip,
+      partyPhone: form.partyPhone,
+      referencePoint: form.referencePoint,
+      referencePointEsn: form.referencePointEsn,
+      distAndDirFromReference: form.distAndDirFromReference,
+      calcEsnCrossing: form.calcEsnCrossing,
+      facilitySize: form.facilitySize,
+      encased: form.encased,
+      encaseSize: form.encaseSize,
+      casingType: form.casingType,
+      coatingType: form.coatingType,
+      pipelineCoatingType: form.pipelineCoatingType,
+      pipelineCoatingCondition: form.pipelineCoatingCondition,
+      psGround: form.psGround,
+      psDitch: form.psDitch,
+      pipelineCondition: form.pipelineCondition,
+      companyContact: form.companyContact,
+      emergency: form.emergency,
+      companyRep: form.companyRep,
+      phoneNumber: form.phoneNumber,
+      encroachingPartyRep: form.encroachingPartyRep,
+      personMetRep: form.personMetRep
+  
+    }).pipe(
+      map(response => {
+        console.log(response);
+      })
+    )
+  }
+
+  createCorrosionInspection(form, digId) {
+    return this.http.post(this.environmentbackendUrl + '/cif',
+    {
+      digId: digId,
+      dateFrom: form.dateFrom,
+      segmentName: form.segmentName,
+      inspectorQualified: form.inspectorQualified,
+      supervisorApproved: form.supervisorApproved,
+      removeReason: form.removeReason,
+      location: form.location,
+      locationName: form.locationName,
+      inWayOf: form.inWayOf,
+      city: form.city,
+      county: form.county,
+      state: form.state,
+      cathodicProtection: form.cathodicProtection,
+      pipeReading: form.pipeReading,
+      bareOrCoated: form.bareOrCoated,
+      coatingType: form.coatingType,
+      coatingCondition: form.coatingCondition,
+      pipelineCondition: form.pipelineCondition,
+      outerDiameter: form.outerDiameter,
+      wallThickness: form.wallThickness,
+      lengthFrom: form.from,
+      lengthTo: form.to,
+      grade: form.grade,
+      internalConditionDesc: form.internalConditionDesc,
+      internalCondition: form.internalCondition,
+      corrLength: form.corrLength,
+      deepestDefect: form.deepestDefect,
+      wallThicknessLossPercentage: form.wallThicknessLossPercentage,
+      largestCorrPitDiameter: form.largestCorrPitDiameter,
+      sentToLab: form.sentToLab,
+      labName: form.labName,
+      labAddress: form.labAddress,
+      completedBy: form.completedBy
+    }).pipe(
+      map(response => {
+        console.log(response);
+      })
+    )
+  }
+
   createWorkPermit(form, digId) {
-    return this.http.post('http://localhost:8080/wpf', 
+    return this.http.post(this.environmentbackendUrl + '/wpf', 
     {
       digId: digId,
       dateFrom: form.dateFrom,
@@ -129,7 +259,7 @@ export class DigService {
   }
 
   createExcavationWorksheet(form, digId) {
-    return this.http.post('http://localhost:8080/sec', 
+    return this.http.post(this.environmentbackendUrl + '/sec', 
     {
       digId: digId,
       dateFrom: form.dateFrom,
@@ -174,91 +304,111 @@ export class DigService {
   }
 
   getAllWorkflows() {
-    return this.http.get('http://localhost:8080/workflow').pipe(
+    return this.http.get(this.environmentbackendUrl + '/workflow').pipe(
       map(response => response)
     );
   }
 
   getAllClients() {
-    return this.http.get('http://localhost:8080/client').pipe(
+    return this.http.get(this.environmentbackendUrl + '/client').pipe(
       map(response => response)
     );
   }
 
   getAllFacilities() {
-    return this.http.get('http://localhost:8080/facility').pipe(
+    return this.http.get(this.environmentbackendUrl + '/facility').pipe(
       map(response =>  response)
     );
   }
 
   getAllDigs() {
-    return this.http.get<Dig>('http://localhost:8080/dig').pipe(
+    return this.http.get<Dig>(this.environmentbackendUrl + '/dig').pipe(
       map(response =>  response)
     );
   }
 
+  getNonAssignedDigs() {
+    return this.http.get<Dig>(this.environmentbackendUrl + '/dig/na').pipe(
+      map(response =>  response)
+    );
+  }
+
+  getDigsWithWork() {
+    return this.http.get<Dig>(this.environmentbackendUrl + '/dig/work').pipe(
+      map(response => response)
+    );
+  }
+
   getAllPipelines() {
-    return this.http.get('http://localhost:8080/pipeline').pipe(
+    return this.http.get(this.environmentbackendUrl + '/pipeline').pipe(
       map(response => response)
     );
   }
 
   getAllPaperworks() {
-    return this.http.get('http://localhost:8080/paperwork').pipe(
+    return this.http.get(this.environmentbackendUrl + '/paperwork').pipe(
       map(response => response)
     );
   }
 
   getPaperworksByType(paperworkTypeId: Number) {
-    return this.http.post('http://localhost:8080/paperwork/type', {paperworkTypeId}).pipe(
+    return this.http.post(this.environmentbackendUrl + '/paperwork/type', {paperworkTypeId}).pipe(
       map(response => response)
     );
   }
 
   getPaperwork(paperworkName: String) {
-    return this.http.post('http://localhost:8080/paperwork/name', {paperworkName}).pipe(
+    return this.http.post(this.environmentbackendUrl + '/paperwork/name', {paperworkName}).pipe(
       map(response => response)
     );
   }
 
   getAllPaperworkTypes() {
-    return this.http.get('http://localhost:8080/paperworkType').pipe(
+    return this.http.get(this.environmentbackendUrl + '/paperworkType').pipe(
       map(response => response)
     );
   }
 
   getAllUploads() {
-    return this.http.get('http://localhost:8080/upload').pipe(
+    return this.http.get(this.environmentbackendUrl + '/upload').pipe(
       map(response => response)
     );
   }
 
   getWorkflow(id: Number) {
-    return this.http.get(`http://localhost:8080/workflow/${id}`).pipe(
+    return this.http.get(this.environmentbackendUrl + `/workflow/${id}`).pipe(
       map(response => response)
     );
   }
 
+  assignDigToWorkflow(workflowId: Number, digIds: any) {
+    return this.http.post(this.environmentbackendUrl + '/workflow/set', {workflowId, digIds}).pipe(
+      map(response => {
+      })
+    )
+
+  }
+
   getDig(id: Number) {
-    return this.http.get(`http://localhost:8080/dig/${id}`).pipe(
+    return this.http.get(this.environmentbackendUrl + `/dig/${id}`).pipe(
       map(response => response)
     );
   }
 
   setRepairStatus(repairStatus: String, workflowId: Number) {
-    return this.http.patch('http://localhost:8080/workflow', {repairStatus, workflowId}).pipe(
+    return this.http.patch(this.environmentbackendUrl + '/workflow', {repairStatus, workflowId}).pipe(
       map(response => response)
     );
   }
 
   assignPaperworkToWorkflow(workflowId: Number, paperworkId: Number) {
-    return this.http.post('http://localhost:8080/paperwork', {workflowId, paperworkId}).pipe(
+    return this.http.post(this.environmentbackendUrl + '/paperwork', {workflowId, paperworkId}).pipe(
       map(response => response)
     );
   }
 
   removePaperworkFromWorkflow(workflowId: Number, paperworkId: Number) {
-    return this.http.post('http://localhost:8080/paperwork/remove', {workflowId, paperworkId}).pipe(
+    return this.http.post(this.environmentbackendUrl + '/paperwork/remove', {workflowId, paperworkId}).pipe(
       map(response => response)
     );
   }

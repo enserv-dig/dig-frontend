@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { DigService } from 'src/app/services/dig.service';
+import { DigModalComponent } from './dig-modal/dig-modal.component';
 
 @Component({
   selector: 'app-dig',
@@ -15,7 +16,9 @@ export class DigComponent implements OnInit {
   columns: any;
   workflows: any;
 
-  constructor(private digService: DigService, private toastController: ToastController) {
+  constructor(private digService: DigService,
+              private toastController: ToastController,
+              private modalController: ModalController) {
 
 
     this.columns = [
@@ -56,8 +59,9 @@ export class DigComponent implements OnInit {
   ngOnInit() {}
   
   ionViewWillEnter() {
-    this.digService.getAllDigs().subscribe(data => {
+    this.digService.getNonAssignedDigs().subscribe(data => {
       this.rows = data;
+      console.log(this.rows.length);
     })
     
   }
@@ -89,20 +93,7 @@ export class DigComponent implements OnInit {
   }
 
   createWorkflow() {
-    this.digService.getAllWorkflows().subscribe(data => {
-      this.workflows = data;
-      var num = this.workflows.length;
-      var name = "wf" + num;
-
-      var ids = [];
-      this.digs.forEach(dig => {
-        ids.push(dig.digId);
-      })
-      this.digService.createWorkflow(name, ids).subscribe(wfs => {
-        this.reset();
-        this.presentToast(`workflow ${name} created successfully`,'success');
-      })
-    })
+    this.openDigModal();
   }
 
 
@@ -113,6 +104,20 @@ export class DigComponent implements OnInit {
       color: col
     });
     toast.present();
+  }
+
+  async openDigModal() {
+    const modal = await this.modalController.create({
+      component: DigModalComponent,
+      cssClass: 'my-custom-modal-css',
+      componentProps: {
+        'firstName': 'Douglas',
+        'lastName': 'Adams',
+        'middleInitial': 'N',
+        'digs': this.digs
+      }
+    });
+    return await modal.present();    
   }
 
 

@@ -11,6 +11,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  environmentbackendUrl = 'http://ec2-18-222-177-129.us-east-2.compute.amazonaws.com:8080';
+
   userIsLoggedIn() {
     return localStorage.getItem('user') != null && localStorage.getItem('user').length > 0;
   }
@@ -20,14 +22,14 @@ export class AuthService {
   }
 
   getUser() {
-    return this.http.get<User>('http://localhost:8080/get-user').pipe(
+    return this.http.get<User>(this.environmentbackendUrl + '/get-user').pipe(
       map(response => response)
     );
   }
 
   executeAuthService(username: string, password: string) {
 
-    return this.http.post<LoginResponse>('http://localhost:8080/authenticate', {username, password}).pipe(
+    return this.http.post<LoginResponse>(this.environmentbackendUrl + '/authenticate', {username, password}).pipe(
       map(response => {
         localStorage.setItem('jwt', response.jwt);
         localStorage.setItem('user', response.loggedInUser);
@@ -36,14 +38,14 @@ export class AuthService {
   }
 
   registerUser(username: string, email: string, password: string) {
-    return this.http.post('http://localhost:8080/signup', {username, email, password}).pipe(
+    return this.http.post(this.environmentbackendUrl + '/signup', {username, email, password}).pipe(
       map(response => response)
     );
   }
 
   checkUsername(username: string) {
     console.log(username);
-    return this.http.post('http://localhost:8080/check-username', {username}).pipe(
+    return this.http.post(this.environmentbackendUrl + '/check-username', {username}).pipe(
       map(response => response)
     );
   }
