@@ -21,12 +21,11 @@ export class ClientComponent implements OnInit {
     })
   }
 
-  toggleClicked(event) {
-    if(!event.target.checked) {
-      console.log("change to active");
-    } else {
-      console.log("change to inactive");
-    }
+  toggleClicked(event, client) {
+  console.log(client);
+    this.digService.updateClient(+client.clientId).subscribe(data => {
+      this.ionViewWillEnter();
+    });
 }
 
 

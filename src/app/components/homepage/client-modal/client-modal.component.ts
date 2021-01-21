@@ -38,4 +38,8 @@ export class ClientModalComponent implements OnInit {
     toast.present();
   }
 
+  closeModal() {
+    this.modalController.dismiss();
+  }
+
 }

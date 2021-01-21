@@ -20,7 +20,7 @@
               </ion-item>
               <ion-item-options side="end">
                 <ion-item-option>
-                  <ion-toggle color="light" [checked]="pipeline.activePipeline"></ion-toggle>
+                  <ion-toggle color="light" [checked]="pipeline.activePipeline" (click)="toggleClicked($event, pipeline)"></ion-toggle>
                 </ion-item-option>
               </ion-item-options>
             </ion-item-sliding>

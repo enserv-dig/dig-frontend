@@ -36,9 +36,11 @@ import { DigModalComponent } from './components/dig/dig-modal/dig-modal.componen
 import { PipeInspectComponent } from './components/forms/pipe-inspect/pipe-inspect.component';
 import { CorrosionInspectComponent } from './components/forms/corrosion-inspect/corrosion-inspect.component';
 import { EncroachmentAgreeComponent } from './components/forms/encroachment-agree/encroachment-agree.component';
+import { ResetPwComponent } from './components/reset-pw/reset-pw.component';
+import { ResetFormComponent } from './components/reset-form/reset-form.component';
 
 @NgModule({
-  declarations: [AppComponent, HomepageComponent, LoginComponent, SignupComponent, ClientModalComponent, FacilityModalComponent, PipelineModalComponent, ClientComponent, FacilityComponent, DigComponent, PipelineComponent, DigSelectComponent, WorkflowComponent, WorkflowDetailComponent, SecFormComponent, WorkPermitComponent, PipeInspectComponent, CorrosionInspectComponent, EncroachmentAgreeComponent, WorkspaceComponent, WorkspaceDetailComponent, DigModalComponent],
+  declarations: [AppComponent, HomepageComponent, LoginComponent, SignupComponent, ClientModalComponent, FacilityModalComponent, PipelineModalComponent, ClientComponent, FacilityComponent, DigComponent, PipelineComponent, DigSelectComponent, WorkflowComponent, WorkflowDetailComponent, SecFormComponent, WorkPermitComponent, PipeInspectComponent, CorrosionInspectComponent, EncroachmentAgreeComponent, WorkspaceComponent, WorkspaceDetailComponent, DigModalComponent, ResetPwComponent, ResetFormComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, NgxDatatableModule, ReactiveFormsModule, DpDatePickerModule],
   providers: [

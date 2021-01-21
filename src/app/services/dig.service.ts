@@ -13,7 +13,9 @@ export class DigService {
   @Output() addItem = new EventEmitter();
 
 
-  environmentbackendUrl = 'http://ec2-18-222-177-129.us-east-2.compute.amazonaws.com:8080';
+  // environmentbackendUrl = 'http://ec2-18-222-177-129.us-east-2.compute.amazonaws.com:8080';
+  environmentbackendUrl = 'http://localhost:8080';
+
   
   constructor(private http: HttpClient) { }
 
@@ -27,6 +29,31 @@ export class DigService {
   createClient(clientName: String, clientActive: String) {
     return this.http.post<Client>(this.environmentbackendUrl + '/client', {clientName,clientActive}).pipe(
       map(response => {
+      })
+    );
+  }
+
+  updateClient(clientId: Number) {
+    return this.http.post<Client>(this.environmentbackendUrl + '/client/update', {clientId}).pipe(
+      map(response => {
+
+      })
+    );
+  }
+
+  updatePipeline(pipelineId: Number) {
+    return this.http.post(this.environmentbackendUrl + '/pipeline/update', {pipelineId}).pipe(
+      map(response => {
+
+      })
+    );
+  }
+
+
+  updateFacility(facilityId: Number) {
+    return this.http.post(this.environmentbackendUrl + '/facility/update', {facilityId}).pipe(
+      map(response => {
+
       })
     );
   }

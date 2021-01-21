@@ -1,3 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="closeModal()">
+          Cancel
+          <ion-icon name="close-circle" class="ion-margin"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content fullscreen class="ion-padding">
 <form #createClient="ngForm" (ngSubmit)="submitClient(createClient.form)" class="ion-padding ion-margin" style="margin-top: 10vh;" >
   <ion-list>

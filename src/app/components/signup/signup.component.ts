@@ -13,8 +13,10 @@ export class SignupComponent implements OnInit {
   errorMessage: string = null;
   validUsername = true;
   labelColor = 'danger';
+  successColor="success";
   labelValue = 0;
   labelStrength = 'very weak';
+  validPW = true;
 
   constructor(private authService: AuthService,
               private loadingController: LoadingController,
@@ -90,6 +92,11 @@ export class SignupComponent implements OnInit {
 
     console.log(totalScore);
     return [totalScore.toString(), strength];
+  }
+
+  confirmPW(form, form1) {
+    this.validPW = form.value == form1.value;
+    return this.validPW;
   }
 
 }

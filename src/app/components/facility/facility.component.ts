@@ -20,5 +20,10 @@ export class FacilityComponent implements OnInit {
     })
   }
 
+  toggleClicked(event, facility) {
+      this.digService.updateFacility(+facility.facilityId).subscribe(data => {
+        this.ionViewWillEnter();
+      });
+  }
 
 }

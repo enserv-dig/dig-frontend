@@ -40,5 +40,9 @@ export class PipelineModalComponent implements OnInit {
     toast.present();
   }
 
+  closeModal() {
+    this.modalController.dismiss();
+  }
+
 
 }

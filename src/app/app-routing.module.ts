@@ -11,6 +11,8 @@ import { WorkPermitComponent } from './components/forms/work-permit/work-permit.
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
 import { PipelineComponent } from './components/pipeline/pipeline.component';
+import { ResetFormComponent } from './components/reset-form/reset-form.component';
+import { ResetPwComponent } from './components/reset-pw/reset-pw.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { WorkflowDetailComponent } from './components/workflow-detail/workflow-detail.component';
 import { WorkflowComponent } from './components/workflow/workflow.component';
@@ -20,6 +22,8 @@ import { AuthGuard } from './services/auth/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'reset', component: ResetPwComponent },
+  { path: 'reset-form/:token', component: ResetFormComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomepageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'client', component: ClientComponent, pathMatch: 'full', canActivate: [AuthGuard] },

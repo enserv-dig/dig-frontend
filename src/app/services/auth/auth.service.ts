@@ -11,7 +11,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  environmentbackendUrl = 'http://ec2-18-222-177-129.us-east-2.compute.amazonaws.com:8080';
+  // environmentbackendUrl = 'http://ec2-18-222-177-129.us-east-2.compute.amazonaws.com:8080';
+  environmentbackendUrl = 'http://localhost:8080';
 
   userIsLoggedIn() {
     return localStorage.getItem('user') != null && localStorage.getItem('user').length > 0;
@@ -35,6 +36,18 @@ export class AuthService {
         localStorage.setItem('user', response.loggedInUser);
       })
     );
+  }
+
+  reset_email(email: string) {
+    return this.http.post(this.environmentbackendUrl+'/reset', {email}).pipe(
+      map(response => response)
+    )
+  }
+
+  reset_pw_confirm(password: string, token: string) {
+    return this.http.post(this.environmentbackendUrl+'/reset/confirm', {password, token}).pipe(
+      map(response => response)
+    )
   }
 
   registerUser(username: string, email: string, password: string) {

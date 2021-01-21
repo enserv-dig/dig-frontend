@@ -19,4 +19,10 @@ export class PipelineComponent implements OnInit {
     })
   }
 
+  toggleClicked(event, pipeline) {
+    this.digService.updatePipeline(+pipeline.pipelineId).subscribe(data => {
+      this.ionViewWillEnter();
+    });
+}
+
 }

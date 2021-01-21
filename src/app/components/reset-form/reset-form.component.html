@@ -13,23 +13,22 @@
 
         <ion-card routerDirection="forward">
           <ion-card-header color="primary">
-            <ion-card-title class="ion-text-center">Login</ion-card-title>
+            <ion-card-title class="ion-text-center">Reset Password</ion-card-title>
           </ion-card-header>
           <ion-card-content>        
-            <form #createLogin="ngForm" (ngSubmit)="submitLogin(createLogin.form)" class="ion-padding ion-margin" >
+            <form #changePw="ngForm" (ngSubmit)="submitPw(changePw.form)" class="ion-padding ion-margin" >
               <ion-list>
-                <ion-item>
-                  <ion-label position="floating">Username</ion-label>
-                  <ion-input name="username" ngModel #emailField="ngModel" required></ion-input>
-                </ion-item>
                 <ion-item class="inputField">
                   <ion-label position="floating">Password</ion-label>
                   <ion-input type="password" name="password" ngModel #passwordField="ngModel" required></ion-input>
-                </ion-item>          
-                <ion-button type="submit" expand="block" [disabled]="!createLogin.valid" class="inputField">Login</ion-button>
-                  <a  class="ion-margin" routerLink="/signup">Don't have an account? Sign up</a>
-                  <a  class="ion-margin" routerLink="/reset">Forgot password? Reset it</a>
+                </ion-item>
 
+                <ion-item class="inputField">
+                  <ion-label position="floating">Confirm Password</ion-label>
+                  <ion-input (ionChange)="confirmPW(passwordField, passwordCField)" type="password" name="passwordC" ngModel #passwordCField="ngModel" required></ion-input>
+                </ion-item>
+
+                <ion-button type="submit" expand="block" [disabled]="!changePw.valid || !confirmPW(passwordField, passwordCField)" class="inputField">Reset</ion-button>
               </ion-list>          
               </form>
         </ion-card-content>
@@ -40,3 +39,5 @@
   </ion-grid>
   
 </ion-content>
+
+

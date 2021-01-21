@@ -41,4 +41,8 @@ export class FacilityModalComponent implements OnInit {
     toast.present();
   }
 
+  closeModal() {
+    this.modalController.dismiss();
+  }
+
 }

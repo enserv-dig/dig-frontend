@@ -42,12 +42,21 @@
                   <ion-label position="floating">Password</ion-label>
                   <ion-input (input)="passwordStrength(passwordField)" type="password" name="password" ngModel #passwordField="ngModel" required></ion-input>
                 </ion-item>
+
+                <ion-item class="inputField">
+                  <ion-label position="floating">Confirm Password</ion-label>
+                  <ion-input (ionChange)="confirmPW(passwordField, passwordCField)" type="password" name="passwordC" ngModel #passwordCField="ngModel" required></ion-input>
+                </ion-item>
+
                 <!-- <ion-item *ngIf="passwordField.value" lines="none">
                   <ion-range [(color)]="labelColor" [(value)]="labelValue" max="50" pin="true"></ion-range>
                 </ion-item> -->
-                  <ion-label *ngIf="passwordField.value" [color]="labelColor">Your password is {{labelStrength}}</ion-label>
 
-                <ion-button type="submit" expand="block" [disabled]="!createSignup.valid || !validUsername" class="inputField">Register
+                  <!-- <ion-label *ngIf="passwordField.value" [color]="labelColor">Your password is {{labelStrength}}</ion-label> -->
+                  <ion-label *ngIf="!validPW" [color]="labelColor">Your passwords do not match</ion-label>
+
+
+                <ion-button type="submit" expand="block" [disabled]="!createSignup.valid || !validUsername || !confirmPW(passwordField, passwordCField)" class="inputField">Register
                 </ion-button>
 
                 <a class="ion-margin" routerLink="/login">Already a member? Log in</a>
