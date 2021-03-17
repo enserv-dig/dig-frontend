@@ -13,8 +13,8 @@ export class DigService {
   @Output() addItem = new EventEmitter();
 
 
-  // environmentbackendUrl = 'http://ec2-18-222-177-129.us-east-2.compute.amazonaws.com:8080';
-  environmentbackendUrl = 'http://localhost:8080';
+  environmentbackendUrl = 'http://ec2-18-222-177-129.us-east-2.compute.amazonaws.com:8080';
+  // environmentbackendUrl = 'http://localhost:8080';
 
   
   constructor(private http: HttpClient) { }

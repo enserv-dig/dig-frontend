@@ -48,6 +48,13 @@
                   <ion-input (ionChange)="confirmPW(passwordField, passwordCField)" type="password" name="passwordC" ngModel #passwordCField="ngModel" required></ion-input>
                 </ion-item>
 
+                <ion-item class="inputField">
+                  <ion-label>Select your affiliation</ion-label>
+                  <ion-select placeholder="Select One" name="client" ngModel #clientField="ngModel">
+                    <ion-select-option *ngFor="let client of availableClients" value="{{client.clientId}}"> {{client.clientName}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
                 <!-- <ion-item *ngIf="passwordField.value" lines="none">
                   <ion-range [(color)]="labelColor" [(value)]="labelValue" max="50" pin="true"></ion-range>
                 </ion-item> -->

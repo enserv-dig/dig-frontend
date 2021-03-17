@@ -13,7 +13,7 @@
     <ion-row>
 
         <ion-col size="10" offset="1">
-          <div [formGroup]="filterForm" (ngSubmit)="submit()">
+          <div [formGroup]="filterForm" (ngSubmit)="submit(filterForm)">
 
             <ion-card>
               <ion-card-header>

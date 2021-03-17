@@ -95,7 +95,7 @@ export class WorkflowDetailComponent implements OnInit {
     return flag;
   }
 
-  ppTypeSelected(paperworkType, event) {
+  ppTypeSelected(event) {
     this.digService.getPaperworksByType(+this.ppType).subscribe(data => {
       console.log(data);
       this.paperworks = data;

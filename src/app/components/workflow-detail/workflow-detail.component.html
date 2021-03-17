@@ -42,7 +42,7 @@
 
           <ion-item>
             <ion-label>Paperwork Type</ion-label>
-            <ion-select placeholder="Select One" [(ngModel)]="ppType" (ionChange)="ppTypeSelected(paperworkType, $event)">
+            <ion-select placeholder="Select One" [(ngModel)]="ppType" (ionChange)="ppTypeSelected( $event)">
               <ion-select-option *ngFor="let paperworkType of paperworkTypes" value="{{paperworkType.paperworkTypeId}}">{{paperworkType.paperworkTypeTitle}}</ion-select-option>
             </ion-select>
           </ion-item>

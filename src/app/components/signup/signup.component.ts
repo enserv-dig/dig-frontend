@@ -2,6 +2,8 @@ import { AuthService } from './../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ThrowStmt } from '@angular/compiler';
+import { DigService } from 'src/app/services/dig.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,19 +19,25 @@ export class SignupComponent implements OnInit {
   labelValue = 0;
   labelStrength = 'very weak';
   validPW = true;
+  availableClients = null;
 
   constructor(private authService: AuthService,
               private loadingController: LoadingController,
               private router: Router,
-              private toastController: ToastController) { }
+              private toastController: ToastController,
+              private digService: DigService) { }
 
   ngOnInit() {
-
+    this.digService.getAllClients().subscribe(data => {
+      this.availableClients = data;
+    })
   }
 
   submitSignup(form) {
+
+    console.log(form.value.client);
     this.isLoading = true;
-    this.authService.registerUser(form.value.username, form.value.email, form.value.password).subscribe(
+    this.authService.registerUser(form.value.username, form.value.email, form.value.password, +form.value.client).subscribe(
       data => {
         this.isLoading = false;
         this.router.navigate(['/login']);
@@ -90,7 +98,6 @@ export class SignupComponent implements OnInit {
     this.labelStrength = strength;
     this.labelColor = color;
 
-    console.log(totalScore);
     return [totalScore.toString(), strength];
   }
 

@@ -5,6 +5,7 @@ import {IonicSafeString, ModalController, ToastController} from '@ionic/angular'
 import { ClientModalComponent } from './client-modal/client-modal.component';
 import { FacilityModalComponent } from '../facility-modal/facility-modal.component';
 import { PipelineModalComponent } from '../pipeline-modal/pipeline-modal.component';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-homepage',
@@ -13,9 +14,15 @@ import { PipelineModalComponent } from '../pipeline-modal/pipeline-modal.compone
 })
 export class HomepageComponent implements OnInit {
 
-  constructor(private digService: DigService, private modalController: ModalController, private toastController: ToastController) { }
+  client = null;
 
-  ngOnInit() {}
+  constructor(private digService: DigService, private modalController: ModalController, private toastController: ToastController, private authService: AuthService) { }
+
+  ngOnInit() {
+    this.authService.getUserInfo().subscribe(data => {
+      this.client = data['client'];
+    })
+  }
 
   readCsv(files: FileList) {
   let data: any;

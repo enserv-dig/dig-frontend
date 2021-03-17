@@ -11,8 +11,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  // environmentbackendUrl = 'http://ec2-18-222-177-129.us-east-2.compute.amazonaws.com:8080';
-  environmentbackendUrl = 'http://localhost:8080';
+  environmentbackendUrl = 'http://ec2-18-222-177-129.us-east-2.compute.amazonaws.com:8080';
+  // environmentbackendUrl = 'http://localhost:5000';
+
+  // environmentbackendUrl = 'http://enservesolutions.us-east-2.elasticbeanstalk.com';
+   
+
 
   userIsLoggedIn() {
     return localStorage.getItem('user') != null && localStorage.getItem('user').length > 0;
@@ -28,6 +32,13 @@ export class AuthService {
     );
   }
 
+
+  getUserInfo() {
+    return this.http.get<User>(this.environmentbackendUrl + '/get-user-info').pipe(
+      map(response => response)
+    );
+  }
+  
   executeAuthService(username: string, password: string) {
 
     return this.http.post<LoginResponse>(this.environmentbackendUrl + '/authenticate', {username, password}).pipe(
@@ -50,8 +61,8 @@ export class AuthService {
     )
   }
 
-  registerUser(username: string, email: string, password: string) {
-    return this.http.post(this.environmentbackendUrl + '/signup', {username, email, password}).pipe(
+  registerUser(username: string, email: string, password: string, clientId: number) {
+    return this.http.post(this.environmentbackendUrl + '/signup', {username, email, password, clientId}).pipe(
       map(response => response)
     );
   }
