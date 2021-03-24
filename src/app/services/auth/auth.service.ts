@@ -11,11 +11,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  environmentbackendUrl = 'http://ec2-18-222-177-129.us-east-2.compute.amazonaws.com:8080';
+  // environmentbackendUrl = 'http://ec2-18-222-177-129.us-east-2.compute.amazonaws.com:8080';
   // environmentbackendUrl = 'http://localhost:5000';
 
   // environmentbackendUrl = 'http://enservesolutions.us-east-2.elasticbeanstalk.com';
-   
+  environmentbackendUrl = 'http://enservesolutions.us-east-2.elasticbeanstalk.com';
+
 
 
   userIsLoggedIn() {
