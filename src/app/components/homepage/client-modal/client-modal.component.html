@@ -1,22 +1,24 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-title>Create Client</ion-title>
+
     <ion-buttons slot="end">
-      <ion-button color="danger" (click)="closeModal()">
+      <ion-button color="light" fill="outline"  (click)="closeModal()">
           Cancel
-          <ion-icon name="close-circle" class="ion-margin"></ion-icon>
+          <ion-icon name="close-circle" class="ion-margin-start"></ion-icon>
       </ion-button>
   </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen class="ion-padding">
-<form #createClient="ngForm" (ngSubmit)="submitClient(createClient.form)" class="ion-padding ion-margin" style="margin-top: 10vh;" >
+<form #createClient="ngForm" (ngSubmit)="submitClient(createClient.form)" class="ion-padding ion-margin" style="margin-top: 1vh;" >
   <ion-list>
-    <ion-item>
+    <ion-item class="ion-margin">
       <ion-label position="floating">Name</ion-label>
       <ion-input name="clientName" ngModel #nameField="ngModel" required></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item class="ion-margin">
       <ion-label>Status</ion-label>
       <ion-select (ionChange)="selectOption($event.target.value)"  name="clientStatus"  okText="Okay" cancelText="Dismiss">
         <ion-select-option value="active">Active</ion-select-option>
@@ -24,7 +26,7 @@
       </ion-select>
     </ion-item>
   
-    <ion-button type="submit" expand="block" [disabled]="!createClient.valid" class="inputField">Create</ion-button>
+    <ion-button class="ion-margin" type="submit" expand="block" [disabled]="!createClient.valid" class="inputField">Create</ion-button>
   </ion-list>
   
   </form>
