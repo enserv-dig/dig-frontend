@@ -26,6 +26,7 @@ export class ClientComponent implements OnInit {
     this.digService.updateClient(+client.clientId).subscribe(data => {
       this.ionViewWillEnter();
     });
+
 }
 
 

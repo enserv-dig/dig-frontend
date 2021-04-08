@@ -32,3 +32,11 @@
 @import '~assets/styles/ngx-datatable/_material.css';
 @import '~assets/styles/ngx-datatable/_bootstrap.css';
 @import '~assets/styles/ngx-datatable/_icons.css';
+
+ion-toggle {
+    --background: rgb(240, 12, 12);
+    --background-checked: #f54b08;
+  
+    --handle-background: #7a49a5;
+    --handle-background-checked: #7a49a5;
+  }
