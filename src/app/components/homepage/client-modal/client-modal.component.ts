@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Form } from '@angular/forms';
-import { ModalController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { Client } from 'src/app/commons/client';
 import { DigService } from 'src/app/services/dig.service';
 
@@ -12,14 +12,19 @@ import { DigService } from 'src/app/services/dig.service';
 export class ClientModalComponent implements OnInit {
   status: any;
 
-  constructor(private modalController: ModalController, private digService: DigService, private toastController: ToastController) { }
+  constructor(private modalController: ModalController,
+              private digService: DigService,
+              private toastController: ToastController,
+              private loadingController: LoadingController) { }
 
   ngOnInit() {
   }
 
   submitClient(clientForm) {
+    this.presentLoading();
     var client: Client = new Client(clientForm.value.clientName, clientForm.value.clientStatus);
     this.digService.createClient(clientForm.value.clientName, status).subscribe(data => {
+      this.loadingController.dismiss();
       this.modalController.dismiss();
       this.presentToast();
     });
@@ -40,6 +45,17 @@ export class ClientModalComponent implements OnInit {
 
   closeModal() {
     this.modalController.dismiss();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'creating a new client...',
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 
 }

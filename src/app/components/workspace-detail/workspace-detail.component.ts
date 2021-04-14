@@ -23,7 +23,8 @@ export class WorkspaceDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private digService: DigService,
               private awsService: AwsService, private router: Router,
               private loadingController: LoadingController,
-              private photoService: PhotoService) { }
+              private photoService: PhotoService,
+              ) { }
 
   
   async ngOnInit() {
@@ -31,6 +32,7 @@ export class WorkspaceDetailComponent implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.presentLoading();
     this.route.paramMap.subscribe(data => {
       if (this.route.snapshot.paramMap.has('id')) {
         this.digId = +this.route.snapshot.paramMap.get('id');
@@ -44,6 +46,7 @@ export class WorkspaceDetailComponent implements OnInit {
             return (upload.dig.digId == this.digId);
           })
         })
+        this.loadingController.dismiss();
       }
     })
   }

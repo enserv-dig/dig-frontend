@@ -1,19 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Create Workflow</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="light" fill="outline"  (click)="closeModal()">
+          Cancel
+          <ion-icon name="close-circle" class="ion-margin-start"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content fullscreen class="ion-padding">
-  <form #createWorkflow="ngForm" (ngSubmit)="submitWorkflow(createWorkflow.form)" class="ion-padding ion-margin" style="margin-top: 10vh;" >
+  <form #createWorkflow="ngForm" (ngSubmit)="submitWorkflow(createWorkflow.form)" class="ion-padding ion-margin" style="margin-top: 1vh;" >
     <ion-list>
-      <ion-item>
+      <p class="ion-text-center">create a new workflow..</p>
+      <ion-item class="ion-margin">
         <ion-label position="floating">Workflow Name</ion-label>
         <ion-input name="workflowName" ngModel #nameField="ngModel"></ion-input>
       </ion-item>
-      or add to an existing one..
-      <ion-item>
+      <p class="ion-text-center">or add to an existing one..</p>
+      <ion-item class="ion-margin">
         <ion-label>Select an existing workflow</ion-label>
         <ion-select  ngModel #workflowSelect="ngModel" name="workflowSelect" okText="Okay" cancelText="Dismiss">
           <ion-select-option *ngFor="let wf of workflows" value="{{wf.workflowId}}">{{wf.workflowName}}</ion-select-option>
         </ion-select>
       </ion-item>
     
-      <ion-button type="submit" expand="block" [disabled]="!createWorkflow.valid" class="inputField">Create</ion-button>
+      <ion-button class="ion-margin" type="submit" expand="block" [disabled]="!createWorkflow.valid" class="inputField">Create</ion-button>
     </ion-list>
     
     </form>

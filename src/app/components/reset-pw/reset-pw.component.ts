@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class ResetPwComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private toastController: ToastController) { }
 
   ngOnInit() {}
 
@@ -19,5 +20,16 @@ export class ResetPwComponent implements OnInit {
       console.log(data);
     })
   }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Password reset link sent',
+      duration: 2000,
+      color: 'success'
+    });
+    toast.present();
+  }
+
+
 
 }

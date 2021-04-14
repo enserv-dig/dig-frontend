@@ -1,4 +1,4 @@
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from './../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,11 +13,15 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private router: Router,
-              private toastController: ToastController) { }
+              private toastController: ToastController,
+              private loadingController: LoadingController) { }
 
   ngOnInit() {}
 
   submitLogin(form) {
+
+    this.presentLoading();
+
 
     localStorage.removeItem('jwt');
     localStorage.removeItem('user');
@@ -25,6 +29,7 @@ export class LoginComponent implements OnInit {
       this.authService.loggedInUserEvent.emit(true);
 
       if (this.authService.userIsLoggedIn) {
+          this.loadingController.dismiss();
           this.router.navigateByUrl('home');
       }
     }, error => {
@@ -40,4 +45,16 @@ export class LoginComponent implements OnInit {
     }
     );
   }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Logging in...',
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
+
 }

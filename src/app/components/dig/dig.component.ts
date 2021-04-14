@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { DigService } from 'src/app/services/dig.service';
 import { DigModalComponent } from './dig-modal/dig-modal.component';
@@ -18,7 +18,8 @@ export class DigComponent implements OnInit {
 
   constructor(private digService: DigService,
               private toastController: ToastController,
-              private modalController: ModalController) {
+              private modalController: ModalController,
+              private loadingController: LoadingController) {
 
 
     this.columns = [
@@ -59,8 +60,12 @@ export class DigComponent implements OnInit {
   ngOnInit() {}
   
   ionViewWillEnter() {
+    if(this.rows == null) {
+      this.presentLoading();
+    }
     this.digService.getNonAssignedDigs().subscribe(data => {
       this.rows = data;
+      this.loadingController.dismiss();
       console.log(this.rows.length);
     })
     
@@ -118,6 +123,17 @@ export class DigComponent implements OnInit {
       }
     });
     return await modal.present();    
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'loading digs...',
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { DigService } from 'src/app/services/dig.service';
 import { DigSelectComponent } from '../dig-select/dig-select.component';
 
@@ -12,10 +12,14 @@ export class WorkflowComponent implements OnInit {
 
   workflows: any;
 
-  constructor(private modalController: ModalController, private digService: DigService) { }
+  constructor(private modalController: ModalController,
+              private digService: DigService,
+              private loadingController: LoadingController) { }
 
   ngOnInit() {
+    this.presentLoading();
     this.digService.getAllWorkflows().subscribe(data => {
+      this.loadingController.dismiss();
       this.workflows = data;
     })
   }
@@ -37,5 +41,16 @@ export class WorkflowComponent implements OnInit {
  cre(data) {
   console.log(data);
  }
+
+ async presentLoading() {
+  const loading = await this.loadingController.create({
+    cssClass: 'my-custom-class',
+    message: 'loading workflows...',
+  });
+  await loading.present();
+
+  const { role, data } = await loading.onDidDismiss();
+  console.log('Loading dismissed!');
+}
 
 }

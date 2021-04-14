@@ -14,8 +14,10 @@ export class DigService {
 
 
   // environmentbackendUrl = 'http://ec2-18-222-177-129.us-east-2.compute.amazonaws.com:8080';
-  // environmentbackendUrl = 'http://localhost:8080';
-  environmentbackendUrl = 'http://enservesolutions.us-east-2.elasticbeanstalk.com';
+  environmentbackendUrl = 'http://localhost:8080';
+  
+  
+  // environmentbackendUrl = 'http://enservesolutions.us-east-2.elasticbeanstalk.com';
 
   
   constructor(private http: HttpClient) { }
@@ -77,6 +79,22 @@ export class DigService {
     return this.http.post(this.environmentbackendUrl + '/workflow', {workflowName, digIds}).pipe(
       map(response => {
         console.log(digIds);
+      })
+    )
+  }
+
+  setStepToWorkflow(step: number, workflowId: number) {
+    return this.http.post(this.environmentbackendUrl + '/workflow/step', {step, workflowId}).pipe(
+      map(response => {
+        console.log(response);
+      })
+    )
+  }
+
+  setPPTypeToWorkflow(paperworkTypeId: number, workflowId: number) {
+    return this.http.post(this.environmentbackendUrl + '/workflow/pptype', {paperworkTypeId, workflowId}).pipe(
+      map(response => {
+        console.log(response);
       })
     )
   }

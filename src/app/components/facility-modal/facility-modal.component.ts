@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { Facility } from 'src/app/commons/facility';
 import { DigService } from 'src/app/services/dig.service';
 
@@ -12,7 +12,10 @@ export class FacilityModalComponent implements OnInit {
 
   clients: any;
 
-  constructor(private digService: DigService, private modalController: ModalController, private toastController: ToastController) { }
+  constructor(private digService: DigService,
+              private modalController: ModalController,
+              private toastController: ToastController,
+              private loadingController: LoadingController) { }
 
   ngOnInit() {
     this.digService.getAllClients().subscribe(data => {
@@ -24,8 +27,10 @@ export class FacilityModalComponent implements OnInit {
   }
 
   submitFacility(facilityForm) {
+    this.presentLoading();
     var facility = new Facility(facilityForm.value.facilityName, facilityForm.value.facilityStatus, facilityForm.value.client);
     this.digService.createFacility(facility.facilityName, facility.facilityStatus, facility.client).subscribe(data => {
+      this.loadingController.dismiss();
       this.modalController.dismiss().then(data => {
           this.presentToast();
       });
@@ -43,6 +48,17 @@ export class FacilityModalComponent implements OnInit {
 
   closeModal() {
     this.modalController.dismiss();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'creating a new facility...',
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 
 }

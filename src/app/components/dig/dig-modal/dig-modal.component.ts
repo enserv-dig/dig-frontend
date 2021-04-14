@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { DigService } from 'src/app/services/dig.service';
 
 @Component({
@@ -13,7 +13,10 @@ export class DigModalComponent implements OnInit {
   @Input() digs: any;
   nameField: any;
 
-  constructor(private digService: DigService, private toastController: ToastController, private modalController: ModalController) { }
+  constructor(private digService: DigService,
+             private toastController: ToastController,
+             private modalController: ModalController,
+             private loadingController: LoadingController) { }
 
   ngOnInit() {
     this.digService.getAllWorkflows().subscribe(data => {
@@ -54,11 +57,14 @@ export class DigModalComponent implements OnInit {
 
   createNewWorkflow(name) {
     console.log("new create");
+    this.presentLoading();
+
     var ids = [];
     this.digs.forEach(dig => {
       ids.push(dig.digId);
     })
     this.digService.createWorkflow(name, ids).subscribe(wfs => {
+        this.loadingController.dismiss();
         this.reset();
         this.presentToast(`workflow ${name} created successfully`,'success');
         this.modalController.dismiss();
@@ -69,12 +75,15 @@ export class DigModalComponent implements OnInit {
 
   assignToExistingWorkflow(wf) {
     console.log(wf);
+    this.presentLoading();
     var ids = [];
     this.digs.forEach(dig => {
       ids.push(dig.digId);
     })
     console.log("assign to existing");
     this.digService.assignDigToWorkflow(wf,ids).subscribe(data => {
+      this.loadingController.dismiss();
+
       this.reset();
       this.presentToast(`workflow ${wf} edited successfully`,'success');
       this.modalController.dismiss();
@@ -94,6 +103,17 @@ export class DigModalComponent implements OnInit {
   reset() {
     this.ionViewWillEnter();
     this.digs = [];
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'creating a new workflow...',
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 
 
